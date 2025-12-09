@@ -89,7 +89,6 @@ const columnStructures = computed(() => {
 const props = defineProps({
   blockSize: {
     type: String,
-    required: true,
     default: '12rem'
   }
 });
