@@ -1,6 +1,6 @@
 {
   "name": "swiss-flag-vue",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "files": [
     "dist"
   ],
@@ -11,8 +11,7 @@
     ".": {
       "import": "./dist/swiss-flag-vue.mjs",
       "require": "./dist/swiss-flag-vue.umd.js"
-    },
-    "./style.css": "./dist/swiss-flag-vue.css"
+    }
   },
   "scripts": {
     "build": "vite build",
@@ -21,6 +20,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.2",
     "vite": "^7.2.7",
+    "vite-plugin-css-injected-by-js": "^3.5.2",
     "vue": "^3.5.25"
   },
   "peerDependencies": {
