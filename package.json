@@ -12,7 +12,7 @@
       "import": "./dist/swiss-flag-vue.mjs",
       "require": "./dist/swiss-flag-vue.umd.js"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/swiss-flag-vue.css"
   },
   "scripts": {
     "build": "vite build",
