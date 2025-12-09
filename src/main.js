@@ -19,7 +19,7 @@ createApp({
               href: 'https://github.com/Khoding/swiss-flag-vue',
               target: '_blank'
             },
-            'View on github'
+            'View on GitHub'
           )
         ]
       )
