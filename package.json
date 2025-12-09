@@ -1,0 +1,29 @@
+{
+  "name": "swiss-flag",
+  "version": "1.0.0",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "main": "./dist/swiss-flag-vue.umd.js",
+  "module": "./dist/swiss-flag-vue.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/swiss-flag-vue.mjs",
+      "require": "./dist/swiss-flag-vue.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.2",
+    "vite": "^7.2.7",
+    "vue": "^3.5.25"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  }
+}
