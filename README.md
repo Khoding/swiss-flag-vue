@@ -25,3 +25,9 @@ Import the SwissFlag component into your Vue application and use it in your temp
 import {SwissFlag} from 'swiss-flag-vue';
 </script>
 ```
+
+## Performance Considerations
+
+It's important for me to disclose that the full flag is made out of 92 nodes, while the simplified version (that gets activated for people with less powerful devices or with reduced motion preferences), is made out of 42 nodes.
+
+The previous version I made of this flag was made out of 1056 nodes, and the simplified version had 240, so it was significant, that doesn't mean 92 unused nodes on your website isn't still _way too many_, so please use this component wisely!
