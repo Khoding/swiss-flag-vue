@@ -25,5 +25,8 @@
   },
   "peerDependencies": {
     "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "swiss-flag": "github:Khoding/swiss-flag"
   }
 }
