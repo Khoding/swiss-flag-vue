@@ -12,7 +12,7 @@ createApp({
         'div',
         {
           style:
-            'text-align: center; margin-bottom: 1rem; font-family: sans-serif'
+            'text-align: center; margin-bottom: 1rem; font-family: sans-serif; margin-block-end: 2rem;'
         },
         [
           h('label', [

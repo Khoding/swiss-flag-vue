@@ -43,10 +43,12 @@ import {SwissFlag} from 'swiss-flag-vue';
 | --- | --- | --- | --- |
 | `block-size` | String | `12rem` | Sets the size of the flag. Both width and height are set to this value, maintaining aspect ratio. |
 | `low-perf-variant` | Boolean | `false` | When true, uses a simplified version of the flag with fewer nodes for better performance on less powerful devices. This is to force it in that mode, otherwise it gets activated automatically based on device capabilities and user preferences. |
-| `remove-animation` | Boolean | `false` | When true, disables the waving animation of the flag and automatically enables the low-perf-variant for better performance. |
+| `remove-animation` | Boolean | `false` | When true, disables the waving animation of the flag and makes it a 5x5 flag for performances. |
 
 ## Performance Considerations
 
 It's important for me to disclose that the full flag is made out of 92 nodes, while the simplified version (that gets activated for people with less powerful devices or with reduced motion preferences), is made out of 42 nodes.
 
 The previous version I made of this flag was made out of 1056 nodes, and the simplified version had 240, so it was significant, that doesn't mean 92 unused nodes on your website isn't still _way too many_, so please use this component wisely!
+
+The unanimated version of the flag is made out of only 14 nodes.
