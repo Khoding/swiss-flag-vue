@@ -1,40 +1,47 @@
-import {createApp, h} from 'vue';
+import {createApp, h, ref} from 'vue';
 import SwissFlag from './components/SwissFlag.vue';
 
 createApp({
-  render() {
-    return [
+  setup() {
+    const lowPerfVariant = ref(false);
+    const removeAnimation = ref(false);
+
+    return () => [
       h(
         'div',
         {
-          style: 'text-align: center; margin-top: 2rem; font-family: sans-serif'
+          style:
+            'text-align: center; margin-bottom: 1rem; font-family: sans-serif'
         },
-        'Full animation'
-      ),
-      h(SwissFlag, {
-        blockSize: '12rem'
-      }),
-      h(
-        'div',
-        {
-          style: 'text-align: center; margin-top: 2rem; font-family: sans-serif'
-        },
-        'Reduced animation'
+        [
+          h('label', [
+            h('input', {
+              type: 'checkbox',
+              checked: lowPerfVariant.value,
+              onChange: e => {
+                lowPerfVariant.value = e.target.checked;
+                if (!removeAnimation.value) {
+                  removeAnimation.value = true;
+                  setTimeout(() => (removeAnimation.value = false), 10);
+                }
+              }
+            }),
+            ' Low Perf'
+          ]),
+          h('label', {style: 'margin-left: 1rem'}, [
+            h('input', {
+              type: 'checkbox',
+              checked: removeAnimation.value,
+              onChange: e => (removeAnimation.value = e.target.checked)
+            }),
+            ' No Animation'
+          ])
+        ]
       ),
       h(SwissFlag, {
         blockSize: '12rem',
-        lowPerfVariant: true
-      }),
-      h(
-        'div',
-        {
-          style: 'text-align: center; margin-top: 2rem; font-family: sans-serif'
-        },
-        'No animation'
-      ),
-      h(SwissFlag, {
-        blockSize: '12rem',
-        removeAnimation: true
+        lowPerfVariant: lowPerfVariant.value,
+        removeAnimation: removeAnimation.value
       }),
       h(
         'div',
