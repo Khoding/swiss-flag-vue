@@ -102,8 +102,6 @@ const columnStructures = computed(() => {
   const getWeight = i => {
     if (size === 32) return 1;
     const section = Math.floor(i / 3);
-    // Sections 0, 2, 4 are 6 units wide (weight 2 per col)
-    // Sections 1, 3 are 7 units wide (weight 7/3 per col)
     if (section === 1 || section === 3) return 7 / 3;
     return 2;
   };

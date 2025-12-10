@@ -5,6 +5,7 @@ import {resolve} from 'path';
 
 export default defineConfig({
   plugins: [vue(), cssInjectedByJsPlugin()],
+  publicDir: false,
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.js'),
