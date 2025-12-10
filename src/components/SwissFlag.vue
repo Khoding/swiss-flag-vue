@@ -2,7 +2,7 @@
   <section
     class="flag-grid"
     :class="{
-      'low-perf': !isHighPerformance || lowPerfVariant,
+      'low-perf': !isHighPerformance || lowPerfVariant || removeAnimation,
       'no-animation': removeAnimation
     }"
   >
@@ -64,10 +64,14 @@ const isHighPerformance = computed(() => {
 });
 
 const dimensions = computed(() =>
-  !props.lowPerfVariant && isHighPerformance.value ? 32 : 15
+  !props.lowPerfVariant && !props.removeAnimation && isHighPerformance.value
+    ? 32
+    : 15
 );
 const staggeredDelay = computed(() =>
-  !props.lowPerfVariant && isHighPerformance.value ? 50 : 35
+  !props.lowPerfVariant && !props.removeAnimation && isHighPerformance.value
+    ? 50
+    : 35
 );
 
 const columnStructures = computed(() => {
