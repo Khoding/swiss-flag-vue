@@ -2,7 +2,7 @@
   <section
     class="flag-grid"
     :class="{
-      'low-perf': !isHighPerformance || lowPerfVariant || removeAnimation,
+      'low-perf': !isHighPerformance || lowPerfVariant,
       'no-animation': removeAnimation
     }"
   >
@@ -63,15 +63,17 @@ const isHighPerformance = computed(() => {
   );
 });
 
-const dimensions = computed(() =>
-  !props.lowPerfVariant && !props.removeAnimation && isHighPerformance.value
-    ? 32
-    : 15
-);
+const dimensions = computed(() => {
+  if (props.removeAnimation) {
+    return 5;
+  } else if (!props.lowPerfVariant && isHighPerformance.value) {
+    return 32;
+  } else {
+    return 15;
+  }
+});
 const staggeredDelay = computed(() =>
-  !props.lowPerfVariant && !props.removeAnimation && isHighPerformance.value
-    ? 50
-    : 35
+  !props.lowPerfVariant && isHighPerformance.value ? 50 : 35
 );
 
 const columnStructures = computed(() => {
@@ -84,11 +86,16 @@ const columnStructures = computed(() => {
     hBarY = [13, 18];
     vBarX = [13, 18];
     vBarY = [6, 25];
-  } else {
+  } else if (size === 15) {
     hBarX = [3, 11];
     hBarY = [6, 8];
     vBarX = [6, 8];
     vBarY = [3, 11];
+  } else if (size === 5) {
+    hBarX = [1, 3];
+    hBarY = [2, 2];
+    vBarX = [2, 2];
+    vBarY = [1, 3];
   }
 
   const isWhite = (x, y) => {
@@ -101,6 +108,9 @@ const columnStructures = computed(() => {
 
   const getWeight = i => {
     if (size === 32) return 1;
+    if (size === 5) {
+      return i === 1 || i === 3 ? 7 : 6;
+    }
     const section = Math.floor(i / 3);
     if (section === 1 || section === 3) return 7 / 3;
     return 2;
@@ -184,30 +194,6 @@ const columnStructures = computed(() => {
     &.white {
       background-color: #ffffff;
     }
-  }
-
-  &:not(.low-perf)
-    > .column:nth-child(n + 7):nth-child(-n + 26)
-    .row:nth-child(n + 14):nth-child(-n + 19) {
-    background-color: #ffffff;
-  }
-
-  &:not(.low-perf)
-    > .column:nth-child(n + 14):nth-child(-n + 19)
-    .row:nth-child(n + 7):nth-child(-n + 26) {
-    background-color: #ffffff;
-  }
-
-  &.low-perf
-    .column:nth-child(n + 4):nth-child(-n + 12)
-    .row:nth-child(n + 7):nth-child(-n + 9) {
-    background-color: #ffffff;
-  }
-
-  &.low-perf
-    .column:nth-child(n + 7):nth-child(-n + 9)
-    .row:nth-child(n + 4):nth-child(-n + 12) {
-    background-color: #ffffff;
   }
 }
 </style>
