@@ -41,9 +41,9 @@ import {SwissFlag} from 'swiss-flag-vue';
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| block-size | String | "12rem" | Sets the size of the flag. Both width and height are set to this value, maintaining aspect ratio. |
-| low-perf-variant | Boolean | false | When true, uses a simplified version of the flag with fewer nodes for better performance on less powerful devices. This is to force it in that mode, otherwise it gets activated automatically based on device capabilities and user preferences. |
-| remove-animation | Boolean | false | When true, disables the waving animation of the flag and automatically enables the low-perf-variant for better performance. |
+| `block-size` | String | `12rem` | Sets the size of the flag. Both width and height are set to this value, maintaining aspect ratio. |
+| `low-perf-variant` | Boolean | `false` | When true, uses a simplified version of the flag with fewer nodes for better performance on less powerful devices. This is to force it in that mode, otherwise it gets activated automatically based on device capabilities and user preferences. |
+| `remove-animation` | Boolean | `false` | When true, disables the waving animation of the flag and automatically enables the low-perf-variant for better performance. |
 
 ## Performance Considerations
 
