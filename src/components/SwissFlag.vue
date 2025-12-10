@@ -158,9 +158,6 @@ const columnStructures = computed(() => {
   display: flex;
   aspect-ratio: 1 / 1;
   inline-size: v-bind(blockSize);
-  margin-inline: auto;
-  margin-block-start: 1rem;
-  anchor-name: --flag-grid;
   --oscillate-distance: 2%;
 
   &.low-perf {

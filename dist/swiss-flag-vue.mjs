@@ -1,4 +1,4 @@
-(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode("@keyframes oscillate-87bb284a{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}.flag-grid[data-v-87bb284a]{display:flex;aspect-ratio:1 / 1;inline-size:var(--c39e4474);margin-inline:auto;margin-block-start:1rem;anchor-name:--flag-grid;--oscillate-distance: 2%}.flag-grid.low-perf[data-v-87bb284a]{--oscillate-distance: 3%}.flag-grid.no-animation .column[data-v-87bb284a]{animation:none}.flag-grid .column[data-v-87bb284a]{display:flex;flex:1;flex-direction:column;animation:oscillate-87bb284a .6s infinite alternate ease-in-out backwards}.flag-grid .column.red[data-v-87bb284a]{background-color:red}.flag-grid .column.white[data-v-87bb284a]{background-color:#fff}.flag-grid .row[data-v-87bb284a]{flex:1;inline-size:100%;background-color:red}.flag-grid .row.white[data-v-87bb284a]{background-color:#fff}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode("@keyframes oscillate-e1678377{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}.flag-grid[data-v-e1678377]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v3be60530);--oscillate-distance: 2%}.flag-grid.low-perf[data-v-e1678377]{--oscillate-distance: 3%}.flag-grid.no-animation .column[data-v-e1678377]{animation:none}.flag-grid .column[data-v-e1678377]{display:flex;flex:1;flex-direction:column;animation:oscillate-e1678377 .6s infinite alternate ease-in-out backwards}.flag-grid .column.red[data-v-e1678377]{background-color:red}.flag-grid .column.white[data-v-e1678377]{background-color:#fff}.flag-grid .row[data-v-e1678377]{flex:1;inline-size:100%;background-color:red}.flag-grid .row.white[data-v-e1678377]{background-color:#fff}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
 import { useCssVars as x, computed as h, createElementBlock as v, openBlock as g, normalizeClass as S, Fragment as _, renderList as C, normalizeStyle as M, createCommentVNode as F } from "vue";
 const A = (s, f) => {
   const i = s.__vccOpts || s;
@@ -23,7 +23,7 @@ const A = (s, f) => {
   },
   setup(s) {
     x((r) => ({
-      c39e4474: s.blockSize
+      v3be60530: s.blockSize
     }));
     const f = s, i = h(() => {
       const r = navigator.hardwareConcurrency || 2, m = navigator.deviceMemory || 2, t = navigator.connection?.effectiveType || "4g", n = window.matchMedia(
@@ -34,10 +34,10 @@ const A = (s, f) => {
       () => !f.lowPerfVariant && i.value ? 50 : 35
     ), P = h(() => {
       const r = p.value, m = [];
-      let t, n, l, c;
-      r === 32 ? (t = [6, 25], n = [13, 18], l = [13, 18], c = [6, 25]) : r === 15 ? (t = [3, 11], n = [6, 8], l = [6, 8], c = [3, 11]) : r === 5 && (t = [1, 3], n = [2, 2], l = [2, 2], c = [1, 3]);
-      const b = (e, o) => {
-        const d = e >= t[0] && e <= t[1] && o >= n[0] && o <= n[1], u = e >= l[0] && e <= l[1] && o >= c[0] && o <= c[1];
+      let t, n, a, c;
+      r === 32 ? (t = [6, 25], n = [13, 18], a = [13, 18], c = [6, 25]) : r === 15 ? (t = [3, 11], n = [6, 8], a = [6, 8], c = [3, 11]) : r === 5 && (t = [1, 3], n = [2, 2], a = [2, 2], c = [1, 3]);
+      const z = (e, o) => {
+        const d = e >= t[0] && e <= t[1] && o >= n[0] && o <= n[1], u = e >= a[0] && e <= a[1] && o >= c[0] && o <= c[1];
         return d || u;
       }, k = (e) => {
         if (r === 32) return 1;
@@ -48,18 +48,18 @@ const A = (s, f) => {
       };
       for (let e = 0; e < r; e++) {
         const o = [];
-        let d = 0, u = b(e, 0) ? "white" : "red";
-        for (let a = 1; a < r; a++) {
-          const B = b(e, a) ? "white" : "red";
-          if (B !== u) {
+        let d = 0, u = z(e, 0) ? "white" : "red";
+        for (let l = 1; l < r; l++) {
+          const b = z(e, l) ? "white" : "red";
+          if (b !== u) {
             let V = 0;
-            for (let y = d; y < a; y++) V += k(y);
-            o.push({ color: u, size: V }), u = B, d = a;
+            for (let y = d; y < l; y++) V += k(y);
+            o.push({ color: u, size: V }), u = b, d = l;
           }
         }
-        let z = 0;
-        for (let a = d; a < r; a++) z += k(a);
-        o.push({ color: u, size: z }), m.push({
+        let B = 0;
+        for (let l = d; l < r; l++) B += k(l);
+        o.push({ color: u, size: B }), m.push({
           width: k(e),
           blocks: o
         });
@@ -80,15 +80,15 @@ const A = (s, f) => {
           flex: t.width
         })
       }, [
-        t.blocks.length > 1 ? (g(!0), v(_, { key: 0 }, C(t.blocks, (l, c) => (g(), v("div", {
+        t.blocks.length > 1 ? (g(!0), v(_, { key: 0 }, C(t.blocks, (a, c) => (g(), v("div", {
           key: c,
-          class: S(["row", l.color]),
-          style: M({ flex: l.size })
+          class: S(["row", a.color]),
+          style: M({ flex: a.size })
         }, null, 6))), 128)) : F("", !0)
       ], 6))), 128))
     ], 2));
   }
-}, H = /* @__PURE__ */ A(D, [["__scopeId", "data-v-87bb284a"]]), X = {
+}, H = /* @__PURE__ */ A(D, [["__scopeId", "data-v-e1678377"]]), X = {
   install: (s) => {
     s.component("SwissFlag", H);
   }
