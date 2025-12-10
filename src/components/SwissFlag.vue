@@ -1,5 +1,11 @@
 <template>
-  <section class="flag-grid" :class="{'low-perf': !isHighPerformance}">
+  <section
+    class="flag-grid"
+    :class="{
+      'low-perf': !isHighPerformance || lowPerfVariant,
+      'no-animation': removeAnimation
+    }"
+  >
     <div
       v-for="(colBlocks, index) in columnStructures"
       :key="index"
@@ -23,6 +29,21 @@
 <script setup>
 import {computed} from 'vue';
 
+const props = defineProps({
+  blockSize: {
+    type: String,
+    default: '12rem'
+  },
+  lowPerfVariant: {
+    type: Boolean,
+    default: false
+  },
+  removeAnimation: {
+    type: Boolean,
+    default: false
+  }
+});
+
 const isHighPerformance = computed(() => {
   const cpuCores = navigator.hardwareConcurrency || 2;
   const deviceMemory = navigator.deviceMemory || 2;
@@ -39,8 +60,12 @@ const isHighPerformance = computed(() => {
   );
 });
 
-const dimensions = computed(() => (isHighPerformance.value ? 32 : 15));
-const staggeredDelay = computed(() => (isHighPerformance.value ? 50 : 35));
+const dimensions = computed(() =>
+  !props.lowPerfVariant && isHighPerformance.value ? 32 : 15
+);
+const staggeredDelay = computed(() =>
+  !props.lowPerfVariant && isHighPerformance.value ? 50 : 35
+);
 
 const columnStructures = computed(() => {
   const size = dimensions.value;
@@ -85,13 +110,6 @@ const columnStructures = computed(() => {
   }
   return cols;
 });
-
-const props = defineProps({
-  blockSize: {
-    type: String,
-    default: '12rem'
-  }
-});
 </script>
 
 <style scoped>
@@ -115,6 +133,10 @@ const props = defineProps({
 
   &.low-perf {
     --oscillate-distance: 3%;
+  }
+
+  &.no-animation .column {
+    animation: none;
   }
 
   .column {

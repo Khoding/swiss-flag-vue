@@ -7,6 +7,14 @@ createApp({
       h(SwissFlag, {
         blockSize: '12rem'
       }),
+      h(SwissFlag, {
+        blockSize: '12rem',
+        lowPerfVariant: true
+      }),
+      h(SwissFlag, {
+        blockSize: '12rem',
+        removeAnimation: true
+      }),
       h(
         'div',
         {

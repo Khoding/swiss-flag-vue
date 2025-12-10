@@ -1,69 +1,83 @@
-(function(){"use strict";try{if(typeof document<"u"){var n=document.createElement("style");n.appendChild(document.createTextNode("@keyframes oscillate-90ce4284{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}.flag-grid[data-v-90ce4284]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v564ef1b6);margin-inline:auto;margin-block-start:1rem;anchor-name:--flag-grid;--oscillate-distance: 2%}.flag-grid.low-perf[data-v-90ce4284]{--oscillate-distance: 3%}.flag-grid .column[data-v-90ce4284]{display:flex;flex:1;flex-direction:column;animation:oscillate-90ce4284 .6s infinite alternate ease-in-out backwards}.flag-grid .column.red[data-v-90ce4284]{background-color:red}.flag-grid .column.white[data-v-90ce4284]{background-color:#fff}.flag-grid .row[data-v-90ce4284]{flex:1;inline-size:100%;background-color:red}.flag-grid .row.white[data-v-90ce4284]{background-color:#fff}.flag-grid:not(.low-perf)>.column:nth-child(n+7):nth-child(-n+26) .row[data-v-90ce4284]:nth-child(n+14):nth-child(-n+19){background-color:#fff}.flag-grid:not(.low-perf)>.column:nth-child(n+14):nth-child(-n+19) .row[data-v-90ce4284]:nth-child(n+7):nth-child(-n+26){background-color:#fff}.flag-grid.low-perf .column:nth-child(n+4):nth-child(-n+12) .row[data-v-90ce4284]:nth-child(n+7):nth-child(-n+9){background-color:#fff}.flag-grid.low-perf .column:nth-child(n+7):nth-child(-n+9) .row[data-v-90ce4284]:nth-child(n+4):nth-child(-n+12){background-color:#fff}")),document.head.appendChild(n)}}catch(a){console.error("vite-plugin-css-injected-by-js",a)}})();
-import { useCssVars as B, computed as g, createElementBlock as p, openBlock as v, normalizeClass as y, Fragment as z, renderList as C, normalizeStyle as k, createCommentVNode as F } from "vue";
-const M = (c, i) => {
-  const f = c.__vccOpts || c;
-  for (const [h, _] of i)
-    f[h] = _;
-  return f;
-}, b = {
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode("@keyframes oscillate-167adbe2{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}.flag-grid[data-v-167adbe2]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v0d48245e);margin-inline:auto;margin-block-start:1rem;anchor-name:--flag-grid;--oscillate-distance: 2%}.flag-grid.low-perf[data-v-167adbe2]{--oscillate-distance: 3%}.flag-grid.no-animation .column[data-v-167adbe2]{animation:none}.flag-grid .column[data-v-167adbe2]{display:flex;flex:1;flex-direction:column;animation:oscillate-167adbe2 .6s infinite alternate ease-in-out backwards}.flag-grid .column.red[data-v-167adbe2]{background-color:red}.flag-grid .column.white[data-v-167adbe2]{background-color:#fff}.flag-grid .row[data-v-167adbe2]{flex:1;inline-size:100%;background-color:red}.flag-grid .row.white[data-v-167adbe2]{background-color:#fff}.flag-grid:not(.low-perf)>.column:nth-child(n+7):nth-child(-n+26) .row[data-v-167adbe2]:nth-child(n+14):nth-child(-n+19){background-color:#fff}.flag-grid:not(.low-perf)>.column:nth-child(n+14):nth-child(-n+19) .row[data-v-167adbe2]:nth-child(n+7):nth-child(-n+26){background-color:#fff}.flag-grid.low-perf .column:nth-child(n+4):nth-child(-n+12) .row[data-v-167adbe2]:nth-child(n+7):nth-child(-n+9){background-color:#fff}.flag-grid.low-perf .column:nth-child(n+7):nth-child(-n+9) .row[data-v-167adbe2]:nth-child(n+4):nth-child(-n+12){background-color:#fff}")),document.head.appendChild(a)}}catch(n){console.error("vite-plugin-css-injected-by-js",n)}})();
+import { useCssVars as k, computed as p, createElementBlock as f, openBlock as v, normalizeClass as y, Fragment as B, renderList as V, normalizeStyle as _, createCommentVNode as P } from "vue";
+const F = (t, g) => {
+  const c = t.__vccOpts || t;
+  for (const [h, w] of g)
+    c[h] = w;
+  return c;
+}, M = {
   __name: "SwissFlag",
   props: {
     blockSize: {
       type: String,
-      required: !0,
       default: "12rem"
+    },
+    lowPerfVariant: {
+      type: Boolean,
+      default: !1
+    },
+    removeAnimation: {
+      type: Boolean,
+      default: !1
     }
   },
-  setup(c) {
-    B((o) => ({
-      v564ef1b6: c.blockSize
+  setup(t) {
+    k((n) => ({
+      v0d48245e: t.blockSize
     }));
-    const i = g(() => {
-      const o = navigator.hardwareConcurrency || 2, u = navigator.deviceMemory || 2, e = navigator.connection?.effectiveType || "4g", t = window.matchMedia(
+    const g = t, c = p(() => {
+      const n = navigator.hardwareConcurrency || 2, u = navigator.deviceMemory || 2, e = navigator.connection?.effectiveType || "4g", r = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
-      return o >= 4 && u >= 4 && e !== "slow-2g" && !t;
-    }), f = g(() => i.value ? 32 : 15), h = g(() => i.value ? 50 : 35), _ = g(() => {
-      const o = f.value, u = [];
-      let e, t, s, a;
-      o === 32 ? (e = [6, 25], t = [13, 18], s = [13, 18], a = [6, 25]) : (e = [3, 11], t = [6, 8], s = [6, 8], a = [3, 11]);
-      const w = (r, n) => {
-        const d = r >= e[0] && r <= e[1] && n >= t[0] && n <= t[1], l = r >= s[0] && r <= s[1] && n >= a[0] && n <= a[1];
-        return d || l;
+      return n >= 4 && u >= 4 && e !== "slow-2g" && !r;
+    }), h = p(
+      () => !g.lowPerfVariant && c.value ? 32 : 15
+    ), w = p(
+      () => !g.lowPerfVariant && c.value ? 50 : 35
+    ), C = p(() => {
+      const n = h.value, u = [];
+      let e, r, s, l;
+      n === 32 ? (e = [6, 25], r = [13, 18], s = [13, 18], l = [6, 25]) : (e = [3, 11], r = [6, 8], s = [6, 8], l = [3, 11]);
+      const S = (o, a) => {
+        const m = o >= e[0] && o <= e[1] && a >= r[0] && a <= r[1], i = o >= s[0] && o <= s[1] && a >= l[0] && a <= l[1];
+        return m || i;
       };
-      for (let r = 0; r < o; r++) {
-        const n = [];
-        let d = 0, l = w(r, 0) ? "white" : "red";
-        for (let m = 1; m < o; m++) {
-          const S = w(r, m) ? "white" : "red";
-          S !== l && (n.push({ color: l, size: m - d }), l = S, d = m);
+      for (let o = 0; o < n; o++) {
+        const a = [];
+        let m = 0, i = S(o, 0) ? "white" : "red";
+        for (let d = 1; d < n; d++) {
+          const z = S(o, d) ? "white" : "red";
+          z !== i && (a.push({ color: i, size: d - m }), i = z, m = d);
         }
-        n.push({ color: l, size: o - d }), u.push(n);
+        a.push({ color: i, size: n - m }), u.push(a);
       }
       return u;
     });
-    return (o, u) => (v(), p("section", {
-      class: y(["flag-grid", { "low-perf": !i.value }])
+    return (n, u) => (v(), f("section", {
+      class: y(["flag-grid", {
+        "low-perf": !c.value || t.lowPerfVariant,
+        "no-animation": t.removeAnimation
+      }])
     }, [
-      (v(!0), p(z, null, C(_.value, (e, t) => (v(), p("div", {
-        key: t,
+      (v(!0), f(B, null, V(C.value, (e, r) => (v(), f("div", {
+        key: r,
         class: y(["column", e.length === 1 ? e[0].color : ""]),
-        style: k({ animationDelay: t * h.value + "ms" })
+        style: _({ animationDelay: r * w.value + "ms" })
       }, [
-        e.length > 1 ? (v(!0), p(z, { key: 0 }, C(e, (s, a) => (v(), p("div", {
-          key: a,
+        e.length > 1 ? (v(!0), f(B, { key: 0 }, V(e, (s, l) => (v(), f("div", {
+          key: l,
           class: y(["row", s.color]),
-          style: k({ flex: s.size })
-        }, null, 6))), 128)) : F("", !0)
+          style: _({ flex: s.size })
+        }, null, 6))), 128)) : P("", !0)
       ], 6))), 128))
     ], 2));
   }
-}, x = /* @__PURE__ */ M(b, [["__scopeId", "data-v-90ce4284"]]), D = {
-  install: (c) => {
-    c.component("SwissFlag", x);
+}, b = /* @__PURE__ */ F(M, [["__scopeId", "data-v-167adbe2"]]), A = {
+  install: (t) => {
+    t.component("SwissFlag", b);
   }
 };
 export {
-  x as SwissFlag,
-  D as default
+  b as SwissFlag,
+  A as default
 };
