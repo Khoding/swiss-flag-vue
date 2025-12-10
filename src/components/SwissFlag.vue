@@ -7,15 +7,18 @@
     }"
   >
     <div
-      v-for="(colBlocks, index) in columnStructures"
+      v-for="(col, index) in columnStructures"
       :key="index"
       class="column"
-      :class="colBlocks.length === 1 ? colBlocks[0].color : ''"
-      :style="{animationDelay: index * staggeredDelay + 'ms'}"
+      :class="col.blocks.length === 1 ? col.blocks[0].color : ''"
+      :style="{
+        animationDelay: index * staggeredDelay + 'ms',
+        flex: col.width
+      }"
     >
-      <template v-if="colBlocks.length > 1">
+      <template v-if="col.blocks.length > 1">
         <div
-          v-for="(block, bIndex) in colBlocks"
+          v-for="(block, bIndex) in col.blocks"
           :key="bIndex"
           class="row"
           :class="block.color"
@@ -92,6 +95,15 @@ const columnStructures = computed(() => {
     return inHBar || inVBar;
   };
 
+  const getWeight = i => {
+    if (size === 32) return 1;
+    const section = Math.floor(i / 3);
+    // Sections 0, 2, 4 are 6 units wide (weight 2 per col)
+    // Sections 1, 3 are 7 units wide (weight 7/3 per col)
+    if (section === 1 || section === 3) return 7 / 3;
+    return 2;
+  };
+
   for (let x = 0; x < size; x++) {
     const blocks = [];
     let currentStart = 0;
@@ -100,13 +112,21 @@ const columnStructures = computed(() => {
     for (let y = 1; y < size; y++) {
       const color = isWhite(x, y) ? 'white' : 'red';
       if (color !== currentColor) {
-        blocks.push({color: currentColor, size: y - currentStart});
+        let blockSize = 0;
+        for (let k = currentStart; k < y; k++) blockSize += getWeight(k);
+        blocks.push({color: currentColor, size: blockSize});
         currentColor = color;
         currentStart = y;
       }
     }
-    blocks.push({color: currentColor, size: size - currentStart});
-    cols.push(blocks);
+    let blockSize = 0;
+    for (let k = currentStart; k < size; k++) blockSize += getWeight(k);
+    blocks.push({color: currentColor, size: blockSize});
+
+    cols.push({
+      width: getWeight(x),
+      blocks
+    });
   }
   return cols;
 });
