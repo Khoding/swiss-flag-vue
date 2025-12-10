@@ -51,6 +51,7 @@ createApp({
         ]
       ),
       h(SwissFlag, {
+        style: 'margin-inline: auto;',
         blockSize: `${flagSize.value}rem`,
         lowPerfVariant: lowPerfVariant.value,
         removeAnimation: removeAnimation.value
@@ -58,7 +59,8 @@ createApp({
       h(
         'div',
         {
-          style: 'text-align: center; margin-top: 2rem; font-family: sans-serif'
+          style:
+            'text-align: center; margin-block-start: 2rem; font-family: sans-serif'
         },
         [
           h(
