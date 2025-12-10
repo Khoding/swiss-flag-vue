@@ -5,6 +5,7 @@ createApp({
   setup() {
     const lowPerfVariant = ref(false);
     const removeAnimation = ref(false);
+    const flagSize = ref(12);
 
     return () => [
       h(
@@ -35,11 +36,22 @@ createApp({
               onChange: e => (removeAnimation.value = e.target.checked)
             }),
             ' No Animation'
+          ]),
+          h('label', {style: 'margin-left: 1rem'}, [
+            'Size: ',
+            h('input', {
+              type: 'range',
+              min: '2',
+              max: '50',
+              value: flagSize.value,
+              onInput: e => (flagSize.value = e.target.value)
+            }),
+            `${flagSize.value}rem`
           ])
         ]
       ),
       h(SwissFlag, {
-        blockSize: '12rem',
+        blockSize: `${flagSize.value}rem`,
         lowPerfVariant: lowPerfVariant.value,
         removeAnimation: removeAnimation.value
       }),
