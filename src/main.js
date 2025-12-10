@@ -4,13 +4,34 @@ import SwissFlag from './components/SwissFlag.vue';
 createApp({
   render() {
     return [
+      h(
+        'div',
+        {
+          style: 'text-align: center; margin-top: 2rem; font-family: sans-serif'
+        },
+        'Full animation'
+      ),
       h(SwissFlag, {
         blockSize: '12rem'
       }),
+      h(
+        'div',
+        {
+          style: 'text-align: center; margin-top: 2rem; font-family: sans-serif'
+        },
+        'Reduced animation'
+      ),
       h(SwissFlag, {
         blockSize: '12rem',
         lowPerfVariant: true
       }),
+      h(
+        'div',
+        {
+          style: 'text-align: center; margin-top: 2rem; font-family: sans-serif'
+        },
+        'No animation'
+      ),
       h(SwissFlag, {
         blockSize: '12rem',
         removeAnimation: true
