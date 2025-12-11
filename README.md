@@ -47,8 +47,8 @@ import {SwissFlag} from 'swiss-flag-vue';
 
 ## Performance Considerations
 
-It's important for me to disclose that the full flag is made out of 93 nodes, while the simplified version (that gets activated for people with less powerful devices or with reduced motion preferences), is made out of 43 nodes.
+It's important for me to disclose that the full flag is made out of 33 nodes, while the simplified version (that gets activated for people with less powerful devices or with reduced motion preferences), is made out of 16 nodes.
 
-The previous version I made of this flag was made out of 1057 nodes, and the simplified version had 241, so it was significant, that doesn't mean 93 unused nodes on your website isn't still _way too many_, so please use this component wisely!
+The previous version I made of this flag was made out of 1057 nodes, and the simplified version had 241, so it was significant, that doesn't mean 33 unused nodes on your website isn't still _way too many_, so please use this component wisely!
 
-The unanimated version of the flag is made out of only 15 total nodes.
+The unanimated version of the flag is made out of only 6 total nodes.
