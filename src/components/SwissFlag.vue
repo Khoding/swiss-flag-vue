@@ -189,15 +189,6 @@ const columnStructures = computed(() => {
 </script>
 
 <style scoped>
-@keyframes oscillate {
-  from {
-    transform: translateY(var(--oscillate-distance, 2%));
-  }
-  to {
-    transform: translateY(calc(-1 * var(--oscillate-distance, 2%)));
-  }
-}
-
 .flag {
   display: flex;
   aspect-ratio: 1 / 1;
@@ -224,6 +215,15 @@ const columnStructures = computed(() => {
     &.red {
       background-color: #ff0000;
     }
+  }
+}
+
+@keyframes oscillate {
+  from {
+    transform: translateY(var(--oscillate-distance, 2%));
+  }
+  to {
+    transform: translateY(calc(-1 * var(--oscillate-distance, 2%)));
   }
 }
 </style>

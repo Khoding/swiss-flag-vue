@@ -1,4 +1,4 @@
-(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode("@keyframes oscillate-a11e07d5{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}.flag[data-v-a11e07d5]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v22e8d397);--oscillate-distance: 2%;isolation:isolate;color-scheme:light;forced-color-adjust:none}.flag.reduced-motion[data-v-a11e07d5]{--oscillate-distance: 3%}.flag.no-animation .column[data-v-a11e07d5]{animation:none}.flag .column[data-v-a11e07d5]{flex:1;animation:oscillate-a11e07d5 .6s infinite alternate ease-in-out backwards}.flag .column.red[data-v-a11e07d5]{background-color:red}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".flag[data-v-3dfdaa6c]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v2bd64157);--oscillate-distance: 2%;isolation:isolate;color-scheme:light;forced-color-adjust:none}.flag.reduced-motion[data-v-3dfdaa6c]{--oscillate-distance: 3%}.flag.no-animation .column[data-v-3dfdaa6c]{animation:none}.flag .column[data-v-3dfdaa6c]{flex:1;animation:oscillate-3dfdaa6c .6s infinite alternate ease-in-out backwards}.flag .column.red[data-v-3dfdaa6c]{background-color:red}@keyframes oscillate-3dfdaa6c{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
 import { useCssVars as E, computed as p, createElementBlock as S, openBlock as v, normalizeClass as F, Fragment as $, renderList as B, normalizeStyle as M } from "vue";
 const T = (l, c) => {
   const u = l.__vccOpts || l;
@@ -23,7 +23,7 @@ const T = (l, c) => {
   },
   setup(l) {
     E((e) => ({
-      v22e8d397: g.value
+      v2bd64157: g.value
     }));
     const c = l, u = p(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches), f = p(() => c.removeAnimation ? 5 : !c.reduceAnimation && !u.value ? 32 : 15), g = p(() => {
       const e = c.inlineSize;
@@ -63,16 +63,16 @@ const T = (l, c) => {
       };
       for (let t = 0; t < e; t++) {
         let i = -1, a = -1;
-        const d = t >= m[0] && t <= m[1], H = t >= r[0] && t <= r[1];
-        d ? (i = h[0], a = h[1]) : H && (i = s[0], a = s[1]);
+        const d = t >= m[0] && t <= m[1], b = t >= r[0] && t <= r[1];
+        d ? (i = h[0], a = h[1]) : b && (i = s[0], a = s[1]);
         let A = null, W = null;
         if (i === -1)
           W = "red";
         else {
-          const z = y(0, i), b = y(
+          const z = y(0, i), H = y(
             i,
             a + 1
-          ), _ = z / o * 100, C = (z + b) / o * 100;
+          ), _ = z / o * 100, C = (z + H) / o * 100;
           A = `linear-gradient(to bottom, 
         #ff0000 0% ${_}%, 
         #ffffff ${_}% ${C}%, 
@@ -103,7 +103,7 @@ const T = (l, c) => {
       }, null, 6))), 128))
     ], 2));
   }
-}, N = /* @__PURE__ */ T(I, [["__scopeId", "data-v-a11e07d5"]]), D = {
+}, N = /* @__PURE__ */ T(I, [["__scopeId", "data-v-3dfdaa6c"]]), D = {
   install: (l) => {
     l.component("SwissFlag", N);
   }
