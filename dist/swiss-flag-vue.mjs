@@ -1,11 +1,11 @@
-(function(){"use strict";try{if(typeof document<"u"){var e=document.createElement("style");e.appendChild(document.createTextNode("@keyframes oscillate-efed84c9{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}.flag[data-v-efed84c9]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v76929f62);--oscillate-distance: 2%}.flag.reduced-motion[data-v-efed84c9]{--oscillate-distance: 3%}.flag.no-animation .column[data-v-efed84c9]{animation:none}.flag .column[data-v-efed84c9]{flex:1;animation:oscillate-efed84c9 .6s infinite alternate ease-in-out backwards}.flag .column.red[data-v-efed84c9]{background-color:red}")),document.head.appendChild(e)}}catch(a){console.error("vite-plugin-css-injected-by-js",a)}})();
-import { useCssVars as B, computed as g, createElementBlock as S, openBlock as p, normalizeClass as H, Fragment as E, renderList as F, normalizeStyle as T } from "vue";
-const $ = (n, c) => {
-  const l = n.__vccOpts || n;
-  for (const [f, h] of c)
-    l[f] = h;
-  return l;
-}, M = {
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode("@keyframes oscillate-a11e07d5{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}.flag[data-v-a11e07d5]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v22e8d397);--oscillate-distance: 2%;isolation:isolate;color-scheme:light;forced-color-adjust:none}.flag.reduced-motion[data-v-a11e07d5]{--oscillate-distance: 3%}.flag.no-animation .column[data-v-a11e07d5]{animation:none}.flag .column[data-v-a11e07d5]{flex:1;animation:oscillate-a11e07d5 .6s infinite alternate ease-in-out backwards}.flag .column.red[data-v-a11e07d5]{background-color:red}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
+import { useCssVars as E, computed as p, createElementBlock as S, openBlock as v, normalizeClass as F, Fragment as $, renderList as B, normalizeStyle as M } from "vue";
+const T = (l, c) => {
+  const u = l.__vccOpts || l;
+  for (const [f, g] of c)
+    u[f] = g;
+  return u;
+}, I = {
   __name: "SwissFlag",
   props: {
     inlineSize: {
@@ -21,76 +21,94 @@ const $ = (n, c) => {
       default: !1
     }
   },
-  setup(n) {
-    B((o) => ({
-      v76929f62: n.inlineSize
+  setup(l) {
+    E((e) => ({
+      v22e8d397: g.value
     }));
-    const c = n, l = g(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches), f = g(() => c.removeAnimation ? 5 : !c.reduceAnimation && !l.value ? 32 : 15), h = g(
-      () => !c.reduceAnimation && !l.value ? 50 : 35
-    ), W = g(() => {
-      const o = f.value, v = [], s = 32;
-      let i, u, d, m;
-      o === 32 ? (i = [6, 25], u = [13, 18], d = [13, 18], m = [6, 25]) : o === 15 ? (i = [3, 11], u = [6, 8], d = [6, 8], m = [3, 11]) : (i = [1, 3], u = [2, 2], d = [2, 2], m = [1, 3]);
-      const A = (e) => {
-        if (o === 32) return 1;
-        if (o === 5)
-          return e === 1 || e === 3 ? 7 : 6;
-        const t = Math.floor(e / 3);
-        return t === 1 || t === 3 ? 7 / 3 : 2;
-      }, w = (e, t) => {
-        let r = 0;
-        for (let a = e; a < t; a++)
-          r += A(a);
-        return r;
+    const c = l, u = p(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches), f = p(() => c.removeAnimation ? 5 : !c.reduceAnimation && !u.value ? 32 : 15), g = p(() => {
+      const e = c.inlineSize;
+      if (typeof window > "u") return e;
+      let n = null;
+      if (typeof e == "number")
+        n = e;
+      else if (typeof e == "string")
+        if (e.endsWith("px") || !isNaN(e))
+          n = parseFloat(e);
+        else if (e.endsWith("rem")) {
+          const s = parseFloat(
+            getComputedStyle(document.documentElement).fontSize
+          );
+          n = parseFloat(e) * s;
+        } else e.endsWith("vw") && (n = parseFloat(e) * window.innerWidth / 100);
+      if (n === null) return e;
+      const o = f.value;
+      return `${Math.round(n / o) * o}px`;
+    }), x = p(
+      () => !c.reduceAnimation && !u.value ? 50 : 35
+    ), k = p(() => {
+      const e = f.value, n = [], o = 32;
+      let r, s, m, h;
+      e === 32 ? (r = [6, 25], s = [13, 18], m = [13, 18], h = [6, 25]) : e === 15 ? (r = [3, 11], s = [6, 8], m = [6, 8], h = [3, 11]) : (r = [1, 3], s = [2, 2], m = [2, 2], h = [1, 3]);
+      const w = (t) => {
+        if (e === 32) return 1;
+        if (e === 5)
+          return t === 1 || t === 3 ? 7 : 6;
+        const i = Math.floor(t / 3);
+        return i === 1 || i === 3 ? 7 / 3 : 2;
+      }, y = (t, i) => {
+        let a = 0;
+        for (let d = t; d < i; d++)
+          a += w(d);
+        return a;
       };
-      for (let e = 0; e < o; e++) {
-        let t = -1, r = -1;
-        const a = e >= d[0] && e <= d[1], x = e >= i[0] && e <= i[1];
-        a ? (t = m[0], r = m[1]) : x && (t = u[0], r = u[1]);
-        let y = null, z = null;
-        if (t === -1)
-          z = "red";
+      for (let t = 0; t < e; t++) {
+        let i = -1, a = -1;
+        const d = t >= m[0] && t <= m[1], H = t >= r[0] && t <= r[1];
+        d ? (i = h[0], a = h[1]) : H && (i = s[0], a = s[1]);
+        let A = null, W = null;
+        if (i === -1)
+          W = "red";
         else {
-          const _ = w(0, t), b = w(
-            t,
-            r + 1
-          ), k = _ / s * 100, C = (_ + b) / s * 100;
-          y = `linear-gradient(to bottom, 
-        #ff0000 0% ${k}%, 
-        #ffffff ${k}% ${C}%, 
+          const z = y(0, i), b = y(
+            i,
+            a + 1
+          ), _ = z / o * 100, C = (z + b) / o * 100;
+          A = `linear-gradient(to bottom, 
+        #ff0000 0% ${_}%, 
+        #ffffff ${_}% ${C}%, 
         #ff0000 ${C}% 100%)`;
         }
-        v.push({
-          width: A(e),
-          singleColor: z,
-          background: y
+        n.push({
+          width: w(t),
+          singleColor: W,
+          background: A
         });
       }
-      return v;
+      return n;
     });
-    return (o, v) => (p(), S("section", {
-      class: H(["flag", {
-        "reduced-motion": l.value || n.reduceAnimation,
-        "no-animation": n.removeAnimation
+    return (e, n) => (v(), S("section", {
+      class: F(["flag", {
+        "reduced-motion": u.value || l.reduceAnimation,
+        "no-animation": l.removeAnimation
       }])
     }, [
-      (p(!0), S(E, null, F(W.value, (s, i) => (p(), S("div", {
-        key: i,
-        class: H(["column", s.singleColor]),
-        style: T({
-          animationDelay: (i - f.value) * h.value + "ms",
-          flex: s.width,
-          background: s.background
+      (v(!0), S($, null, B(k.value, (o, r) => (v(), S("div", {
+        key: r,
+        class: F(["column", o.singleColor]),
+        style: M({
+          animationDelay: (r - f.value) * x.value + "ms",
+          flex: o.width,
+          background: o.background
         })
       }, null, 6))), 128))
     ], 2));
   }
-}, D = /* @__PURE__ */ $(M, [["__scopeId", "data-v-efed84c9"]]), L = {
-  install: (n) => {
-    n.component("SwissFlag", D);
+}, N = /* @__PURE__ */ T(I, [["__scopeId", "data-v-a11e07d5"]]), D = {
+  install: (l) => {
+    l.component("SwissFlag", N);
   }
 };
 export {
-  D as SwissFlag,
-  L as default
+  N as SwissFlag,
+  D as default
 };

@@ -54,6 +54,36 @@ const gridSize = computed(() => {
   return 15;
 });
 
+const friendlyInlineSize = computed(() => {
+  const raw = props.inlineSize;
+
+  if (typeof window === 'undefined') return raw;
+
+  let pixelWidth = null;
+
+  if (typeof raw === 'number') {
+    pixelWidth = raw;
+  } else if (typeof raw === 'string') {
+    if (raw.endsWith('px') || !isNaN(raw)) {
+      pixelWidth = parseFloat(raw);
+    } else if (raw.endsWith('rem')) {
+      const rootFontSize = parseFloat(
+        getComputedStyle(document.documentElement).fontSize
+      );
+      pixelWidth = parseFloat(raw) * rootFontSize;
+    } else if (raw.endsWith('vw')) {
+      pixelWidth = (parseFloat(raw) * window.innerWidth) / 100;
+    }
+  }
+
+  if (pixelWidth === null) return raw;
+
+  const numOfColumns = gridSize.value;
+  const friendlyWidth = Math.round(pixelWidth / numOfColumns) * numOfColumns;
+
+  return `${friendlyWidth}px`;
+});
+
 const staggeredDelay = computed(() =>
   !props.reduceAnimation && !isReducedMotion.value ? 50 : 35
 );
@@ -171,8 +201,13 @@ const columnStructures = computed(() => {
 .flag {
   display: flex;
   aspect-ratio: 1 / 1;
-  inline-size: v-bind(inlineSize);
+  inline-size: v-bind(friendlyInlineSize);
   --oscillate-distance: 2%;
+
+  /* Prevent colors from being inverted by auto dark mode or high contrast mode */
+  isolation: isolate;
+  color-scheme: light;
+  forced-color-adjust: none;
 
   &.reduced-motion {
     --oscillate-distance: 3%;
