@@ -27,7 +27,7 @@ createApp({
                 }
               }
             }),
-            ' Low Perf'
+            ' Reduce animation'
           ]),
           h('label', {style: 'margin-left: 1rem'}, [
             h('input', {
@@ -46,7 +46,7 @@ createApp({
               value: flagSize.value,
               onInput: e => (flagSize.value = e.target.value)
             }),
-            `${flagSize.value}rem`
+            ` ${flagSize.value}rem`
           ])
         ]
       ),

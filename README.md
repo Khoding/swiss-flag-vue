@@ -25,7 +25,7 @@ Import the SwissFlag component into your Vue application and use it in your temp
   <!-- Custom sizes -->
   <SwissFlag inline-size="20rem" />
 
-  <!-- Low performance variant -->
+  <!-- Reduce animation variant -->
   <SwissFlag :reduce-animation="true" />
 
   <!-- Disable animation -->
