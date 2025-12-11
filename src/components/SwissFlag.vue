@@ -1,20 +1,20 @@
 <template>
   <section
-    class="flag-grid"
+    class="flag"
     :class="{
       'low-perf': !isHighPerformance || lowPerfVariant,
       'no-animation': removeAnimation
     }"
   >
     <div
-      v-for="(col, index) in columnStructures"
+      v-for="(column, index) in columnStructures"
       :key="index"
       class="column"
-      :class="col.singleColor"
+      :class="column.singleColor"
       :style="{
-        animationDelay: index * staggeredDelay + 'ms',
-        flex: col.width,
-        background: col.background
+        animationDelay: (index - gridSize) * staggeredDelay + 'ms',
+        flex: column.width,
+        background: column.background
       }"
     ></div>
   </section>
@@ -42,111 +42,130 @@ const isHighPerformance = computed(() => {
   const cpuCores = navigator.hardwareConcurrency || 2;
   const deviceMemory = navigator.deviceMemory || 2;
   const connection = navigator.connection?.effectiveType || '4g';
-  const prefersReducedMotion = window.matchMedia(
+
+  const isReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   ).matches;
 
-  return (
-    cpuCores >= 4 &&
-    deviceMemory >= 4 &&
-    connection !== 'slow-2g' &&
-    !prefersReducedMotion
-  );
+  const hasGoodHardware = cpuCores >= 4 && deviceMemory >= 4;
+  const hasGoodConnection = connection !== 'slow-2g';
+
+  return hasGoodHardware && hasGoodConnection && !isReducedMotion;
 });
 
-const dimensions = computed(() => {
+const gridSize = computed(() => {
   if (props.removeAnimation) {
     return 5;
-  } else if (!props.lowPerfVariant && isHighPerformance.value) {
-    return 32;
-  } else {
-    return 15;
   }
+
+  if (!props.lowPerfVariant && isHighPerformance.value) {
+    return 32;
+  }
+
+  return 15;
 });
+
 const staggeredDelay = computed(() =>
   !props.lowPerfVariant && isHighPerformance.value ? 50 : 35
 );
 
 const columnStructures = computed(() => {
-  const size = dimensions.value;
-  const cols = [];
+  const size = gridSize.value;
+  const columns = [];
+  const TOTAL_HEIGHT_UNITS = 32;
 
-  let hBarX, hBarY, vBarX, vBarY;
+  // Configuration for the Swiss Cross geometry based on grid resolution
+  let horizontalArmX, horizontalArmY, verticalArmX, verticalArmY;
+
   if (size === 32) {
-    hBarX = [6, 25];
-    hBarY = [13, 18];
-    vBarX = [13, 18];
-    vBarY = [6, 25];
+    horizontalArmX = [6, 25];
+    horizontalArmY = [13, 18];
+    verticalArmX = [13, 18];
+    verticalArmY = [6, 25];
   } else if (size === 15) {
-    hBarX = [3, 11];
-    hBarY = [6, 8];
-    vBarX = [6, 8];
-    vBarY = [3, 11];
-  } else if (size === 5) {
-    hBarX = [1, 3];
-    hBarY = [2, 2];
-    vBarX = [2, 2];
-    vBarY = [1, 3];
+    horizontalArmX = [3, 11];
+    horizontalArmY = [6, 8];
+    verticalArmX = [6, 8];
+    verticalArmY = [3, 11];
+  } else {
+    // size === 5
+    horizontalArmX = [1, 3];
+    horizontalArmY = [2, 2];
+    verticalArmX = [2, 2];
+    verticalArmY = [1, 3];
   }
 
-  const getWeight = i => {
+  // Helper to calculate column width weight to normalize total width to 32 units
+  const getColumnWeight = columnIndex => {
     if (size === 32) return 1;
+
     if (size === 5) {
-      return i === 1 || i === 3 ? 7 : 6;
+      const isWideColumn = columnIndex === 1 || columnIndex === 3;
+      return isWideColumn ? 7 : 6;
     }
-    const section = Math.floor(i / 3);
-    if (section === 1 || section === 3) return 7 / 3;
-    return 2;
+
+    // size === 15
+    const sectionIndex = Math.floor(columnIndex / 3);
+    const isWideSection = sectionIndex === 1 || sectionIndex === 3;
+    return isWideSection ? 7 / 3 : 2;
   };
 
-  const sumWeights = (start, end) => {
-    let sum = 0;
-    for (let i = start; i < end; i++) sum += getWeight(i);
-    return sum;
+  const calculateHeightWeight = (startUnit, endUnit) => {
+    let weightSum = 0;
+    for (let i = startUnit; i < endUnit; i++) {
+      weightSum += getColumnWeight(i);
+    }
+    return weightSum;
   };
-
-  const totalHeight = 32;
 
   for (let x = 0; x < size; x++) {
-    const blocks = [];
+    let whiteStripeStart = -1;
+    let whiteStripeEnd = -1;
 
-    if (x >= vBarX[0] && x <= vBarX[1]) {
-      blocks.push({color: 'red', size: sumWeights(0, vBarY[0])});
-      blocks.push({color: 'white', size: sumWeights(vBarY[0], vBarY[1] + 1)});
-      blocks.push({color: 'red', size: sumWeights(vBarY[1] + 1, size)});
-    } else if (x >= hBarX[0] && x <= hBarX[1]) {
-      blocks.push({color: 'red', size: sumWeights(0, hBarY[0])});
-      blocks.push({color: 'white', size: sumWeights(hBarY[0], hBarY[1] + 1)});
-      blocks.push({color: 'red', size: sumWeights(hBarY[1] + 1, size)});
-    } else {
-      blocks.push({color: 'red', size: sumWeights(0, size)});
+    const isVerticalArm = x >= verticalArmX[0] && x <= verticalArmX[1];
+    const isHorizontalArm = x >= horizontalArmX[0] && x <= horizontalArmX[1];
+
+    if (isVerticalArm) {
+      whiteStripeStart = verticalArmY[0];
+      whiteStripeEnd = verticalArmY[1];
+    } else if (isHorizontalArm) {
+      whiteStripeStart = horizontalArmY[0];
+      whiteStripeEnd = horizontalArmY[1];
     }
 
     let background = null;
     let singleColor = null;
 
-    if (blocks.length === 1) {
-      singleColor = blocks[0].color;
+    // If no white stripe, it's a solid red column
+    if (whiteStripeStart === -1) {
+      singleColor = 'red';
     } else {
-      const stops = [];
-      let currentPos = 0;
-      blocks.forEach(block => {
-        const start = (currentPos / totalHeight) * 100;
-        const end = ((currentPos + block.size) / totalHeight) * 100;
-        const colorHex = block.color === 'red' ? '#ff0000' : '#ffffff';
-        stops.push(`${colorHex} ${start}% ${end}%`);
-        currentPos += block.size;
-      });
-      background = `linear-gradient(to bottom, ${stops.join(', ')})`;
+      // Calculate the height of each segment (Red -> White -> Red)
+      const topRedHeight = calculateHeightWeight(0, whiteStripeStart);
+      const whiteHeight = calculateHeightWeight(
+        whiteStripeStart,
+        whiteStripeEnd + 1
+      );
+
+      // Convert heights to percentages for CSS gradient
+      const whiteStartPercent = (topRedHeight / TOTAL_HEIGHT_UNITS) * 100;
+      const whiteEndPercent =
+        ((topRedHeight + whiteHeight) / TOTAL_HEIGHT_UNITS) * 100;
+
+      background = `linear-gradient(to bottom, 
+        #ff0000 0% ${whiteStartPercent}%, 
+        #ffffff ${whiteStartPercent}% ${whiteEndPercent}%, 
+        #ff0000 ${whiteEndPercent}% 100%)`;
     }
 
-    cols.push({
-      width: getWeight(x),
+    columns.push({
+      width: getColumnWeight(x),
       singleColor,
       background
     });
   }
-  return cols;
+
+  return columns;
 });
 </script>
 
@@ -160,7 +179,7 @@ const columnStructures = computed(() => {
   }
 }
 
-.flag-grid {
+.flag {
   display: flex;
   aspect-ratio: 1 / 1;
   inline-size: v-bind(inlineSize);

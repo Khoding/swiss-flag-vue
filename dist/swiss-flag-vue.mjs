@@ -1,11 +1,11 @@
-(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode("@keyframes oscillate-cf207242{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}.flag-grid[data-v-cf207242]{display:flex;aspect-ratio:1 / 1;inline-size:var(--fbe807ac);--oscillate-distance: 2%}.flag-grid.low-perf[data-v-cf207242]{--oscillate-distance: 3%}.flag-grid.no-animation .column[data-v-cf207242]{animation:none}.flag-grid .column[data-v-cf207242]{display:flex;flex:1;flex-direction:column;animation:oscillate-cf207242 .6s infinite alternate ease-in-out backwards}.flag-grid .column.red[data-v-cf207242]{background-color:red}.flag-grid .column.white[data-v-cf207242]{background-color:#fff}.flag-grid .row[data-v-cf207242]{flex:1;inline-size:100%;background-color:red}.flag-grid .row.white[data-v-cf207242]{background-color:#fff}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
-import { useCssVars as x, computed as h, createElementBlock as v, openBlock as g, normalizeClass as S, Fragment as _, renderList as C, normalizeStyle as M, createCommentVNode as F } from "vue";
-const A = (s, f) => {
-  const i = s.__vccOpts || s;
-  for (const [p, w] of f)
-    i[p] = w;
-  return i;
-}, D = {
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode("@keyframes oscillate-32e9f397{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}.flag[data-v-32e9f397]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v5bbd9da4);--oscillate-distance: 2%}.flag.low-perf[data-v-32e9f397]{--oscillate-distance: 3%}.flag.no-animation .column[data-v-32e9f397]{animation:none}.flag .column[data-v-32e9f397]{flex:1;animation:oscillate-32e9f397 .6s infinite alternate ease-in-out backwards}.flag .column.red[data-v-32e9f397]{background-color:red}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
+import { useCssVars as W, computed as h, createElementBlock as w, openBlock as p, normalizeClass as k, Fragment as x, renderList as G, normalizeStyle as M } from "vue";
+const T = (o, f) => {
+  const s = o.__vccOpts || o;
+  for (const [g, v] of f)
+    s[g] = v;
+  return s;
+}, B = {
   __name: "SwissFlag",
   props: {
     inlineSize: {
@@ -21,79 +21,81 @@ const A = (s, f) => {
       default: !1
     }
   },
-  setup(s) {
-    x((r) => ({
-      fbe807ac: s.inlineSize
+  setup(o) {
+    W((r) => ({
+      v5bbd9da4: o.inlineSize
     }));
-    const f = s, i = h(() => {
-      const r = navigator.hardwareConcurrency || 2, m = navigator.deviceMemory || 2, t = navigator.connection?.effectiveType || "4g", n = window.matchMedia(
+    const f = o, s = h(() => {
+      const r = navigator.hardwareConcurrency || 2, d = navigator.deviceMemory || 2, i = navigator.connection?.effectiveType || "4g", t = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
-      return r >= 4 && m >= 4 && t !== "slow-2g" && !n;
-    }), p = h(() => f.removeAnimation ? 5 : !f.lowPerfVariant && i.value ? 32 : 15), w = h(
-      () => !f.lowPerfVariant && i.value ? 50 : 35
+      return r >= 4 && d >= 4 && i !== "slow-2g" && !t;
+    }), g = h(() => f.removeAnimation ? 5 : !f.lowPerfVariant && s.value ? 32 : 15), v = h(
+      () => !f.lowPerfVariant && s.value ? 50 : 35
     ), P = h(() => {
-      const r = p.value, m = [];
-      let t, n, l, c;
-      r === 32 ? (t = [6, 25], n = [13, 18], l = [13, 18], c = [6, 25]) : r === 15 ? (t = [3, 11], n = [6, 8], l = [6, 8], c = [3, 11]) : r === 5 && (t = [1, 3], n = [2, 2], l = [2, 2], c = [1, 3]);
-      const z = (e, o) => {
-        const d = e >= t[0] && e <= t[1] && o >= n[0] && o <= n[1], u = e >= l[0] && e <= l[1] && o >= c[0] && o <= c[1];
-        return d || u;
-      }, k = (e) => {
+      const r = g.value, d = [], i = 32;
+      let t, l, c, m;
+      r === 32 ? (t = [6, 25], l = [13, 18], c = [13, 18], m = [6, 25]) : r === 15 ? (t = [3, 11], l = [6, 8], c = [6, 8], m = [3, 11]) : (t = [1, 3], l = [2, 2], c = [2, 2], m = [1, 3]);
+      const S = (e) => {
         if (r === 32) return 1;
         if (r === 5)
           return e === 1 || e === 3 ? 7 : 6;
-        const o = Math.floor(e / 3);
-        return o === 1 || o === 3 ? 7 / 3 : 2;
+        const n = Math.floor(e / 3);
+        return n === 1 || n === 3 ? 7 / 3 : 2;
+      }, y = (e, n) => {
+        let a = 0;
+        for (let u = e; u < n; u++)
+          a += S(u);
+        return a;
       };
       for (let e = 0; e < r; e++) {
-        const o = [];
-        let d = 0, u = z(e, 0) ? "white" : "red";
-        for (let a = 1; a < r; a++) {
-          const b = z(e, a) ? "white" : "red";
-          if (b !== u) {
-            let V = 0;
-            for (let y = d; y < a; y++) V += k(y);
-            o.push({ color: u, size: V }), u = b, d = a;
-          }
+        let n = -1, a = -1;
+        const u = e >= c[0] && e <= c[1], b = e >= t[0] && e <= t[1];
+        u ? (n = m[0], a = m[1]) : b && (n = l[0], a = l[1]);
+        let C = null, A = null;
+        if (n === -1)
+          A = "red";
+        else {
+          const z = y(0, n), V = y(
+            n,
+            a + 1
+          ), H = z / i * 100, _ = (z + V) / i * 100;
+          C = `linear-gradient(to bottom, 
+        #ff0000 0% ${H}%, 
+        #ffffff ${H}% ${_}%, 
+        #ff0000 ${_}% 100%)`;
         }
-        let B = 0;
-        for (let a = d; a < r; a++) B += k(a);
-        o.push({ color: u, size: B }), m.push({
-          width: k(e),
-          blocks: o
+        d.push({
+          width: S(e),
+          singleColor: A,
+          background: C
         });
       }
-      return m;
+      return d;
     });
-    return (r, m) => (g(), v("section", {
-      class: S(["flag-grid", {
-        "low-perf": !i.value || s.lowPerfVariant,
-        "no-animation": s.removeAnimation
+    return (r, d) => (p(), w("section", {
+      class: k(["flag", {
+        "low-perf": !s.value || o.lowPerfVariant,
+        "no-animation": o.removeAnimation
       }])
     }, [
-      (g(!0), v(_, null, C(P.value, (t, n) => (g(), v("div", {
-        key: n,
-        class: S(["column", t.blocks.length === 1 ? t.blocks[0].color : ""]),
+      (p(!0), w(x, null, G(P.value, (i, t) => (p(), w("div", {
+        key: t,
+        class: k(["column", i.singleColor]),
         style: M({
-          animationDelay: n * w.value + "ms",
-          flex: t.width
+          animationDelay: (t - g.value) * v.value + "ms",
+          flex: i.width,
+          background: i.background
         })
-      }, [
-        t.blocks.length > 1 ? (g(!0), v(_, { key: 0 }, C(t.blocks, (l, c) => (g(), v("div", {
-          key: c,
-          class: S(["row", l.color]),
-          style: M({ flex: l.size })
-        }, null, 6))), 128)) : F("", !0)
-      ], 6))), 128))
+      }, null, 6))), 128))
     ], 2));
   }
-}, H = /* @__PURE__ */ A(D, [["__scopeId", "data-v-cf207242"]]), X = {
-  install: (s) => {
-    s.component("SwissFlag", H);
+}, E = /* @__PURE__ */ T(B, [["__scopeId", "data-v-32e9f397"]]), $ = {
+  install: (o) => {
+    o.component("SwissFlag", E);
   }
 };
 export {
-  H as SwissFlag,
-  X as default
+  E as SwissFlag,
+  $ as default
 };
