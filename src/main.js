@@ -3,7 +3,7 @@ import SwissFlag from './components/SwissFlag.vue';
 
 createApp({
   setup() {
-    const lowPerfVariant = ref(false);
+    const reduceAnimation = ref(false);
     const removeAnimation = ref(false);
     const flagSize = ref(12);
 
@@ -18,9 +18,9 @@ createApp({
           h('label', [
             h('input', {
               type: 'checkbox',
-              checked: lowPerfVariant.value,
+              checked: reduceAnimation.value,
               onChange: e => {
-                lowPerfVariant.value = e.target.checked;
+                reduceAnimation.value = e.target.checked;
                 if (!removeAnimation.value) {
                   removeAnimation.value = true;
                   setTimeout(() => (removeAnimation.value = false), 10);
@@ -53,7 +53,7 @@ createApp({
       h(SwissFlag, {
         style: 'margin-inline: auto;',
         inlineSize: `${flagSize.value}rem`,
-        lowPerfVariant: lowPerfVariant.value,
+        reduceAnimation: reduceAnimation.value,
         removeAnimation: removeAnimation.value
       }),
       h(
