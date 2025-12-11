@@ -33,7 +33,7 @@
 import {computed} from 'vue';
 
 const props = defineProps({
-  blockSize: {
+  inlineSize: {
     type: String,
     default: '12rem'
   },
@@ -157,7 +157,7 @@ const columnStructures = computed(() => {
 .flag-grid {
   display: flex;
   aspect-ratio: 1 / 1;
-  inline-size: v-bind(blockSize);
+  inline-size: v-bind(inlineSize);
   --oscillate-distance: 2%;
 
   &.low-perf {
