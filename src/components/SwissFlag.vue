@@ -2,7 +2,7 @@
   <section
     class="flag"
     :class="{
-      'low-perf': !isHighPerformance || lowPerfVariant,
+      'reduced-motion': isReducedMotion || reduceAnimation,
       'no-animation': removeAnimation
     }"
   >
@@ -28,7 +28,7 @@ const props = defineProps({
     type: String,
     default: '12rem'
   },
-  lowPerfVariant: {
+  reduceAnimation: {
     type: Boolean,
     default: false
   },
@@ -38,19 +38,8 @@ const props = defineProps({
   }
 });
 
-const isHighPerformance = computed(() => {
-  const cpuCores = navigator.hardwareConcurrency || 2;
-  const deviceMemory = navigator.deviceMemory || 2;
-  const connection = navigator.connection?.effectiveType || '4g';
-
-  const isReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
-
-  const hasGoodHardware = cpuCores >= 4 && deviceMemory >= 4;
-  const hasGoodConnection = connection !== 'slow-2g';
-
-  return hasGoodHardware && hasGoodConnection && !isReducedMotion;
+const isReducedMotion = computed(() => {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 });
 
 const gridSize = computed(() => {
@@ -58,7 +47,7 @@ const gridSize = computed(() => {
     return 5;
   }
 
-  if (!props.lowPerfVariant && isHighPerformance.value) {
+  if (!props.reduceAnimation && !isReducedMotion.value) {
     return 32;
   }
 
@@ -66,7 +55,7 @@ const gridSize = computed(() => {
 });
 
 const staggeredDelay = computed(() =>
-  !props.lowPerfVariant && isHighPerformance.value ? 50 : 35
+  !props.reduceAnimation && !isReducedMotion.value ? 50 : 35
 );
 
 const columnStructures = computed(() => {
@@ -185,7 +174,7 @@ const columnStructures = computed(() => {
   inline-size: v-bind(inlineSize);
   --oscillate-distance: 2%;
 
-  &.low-perf {
+  &.reduced-motion {
     --oscillate-distance: 3%;
   }
 
