@@ -52,7 +52,7 @@ createApp({
       ),
       h(SwissFlag, {
         style: 'margin-inline: auto;',
-        blockSize: `${flagSize.value}rem`,
+        inlineSize: `${flagSize.value}rem`,
         lowPerfVariant: lowPerfVariant.value,
         removeAnimation: removeAnimation.value
       }),

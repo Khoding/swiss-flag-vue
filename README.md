@@ -23,7 +23,7 @@ Import the SwissFlag component into your Vue application and use it in your temp
   <SwissFlag />
 
   <!-- Custom sizes -->
-  <SwissFlag block-size="20rem" />
+  <SwissFlag inline-size="20rem" />
 
   <!-- Low performance variant -->
   <SwissFlag :low-perf-variant="true" />
@@ -41,7 +41,7 @@ import {SwissFlag} from 'swiss-flag-vue';
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `block-size` | String | `12rem` | Sets the size of the flag. Both width and height are set to this value, maintaining aspect ratio. |
+| `inline-size` | String | `12rem` | Sets the size of the flag. The flag is a perfect square. |
 | `low-perf-variant` | Boolean | `false` | When true, uses a simplified version of the flag with fewer nodes for better performance on less powerful devices. This is to force it in that mode, otherwise it gets activated automatically based on device capabilities and user preferences. |
 | `remove-animation` | Boolean | `false` | When true, disables the waving animation of the flag and makes it a 5x5 flag for performances. |
 
