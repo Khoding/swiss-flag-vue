@@ -10,22 +10,13 @@
       v-for="(col, index) in columnStructures"
       :key="index"
       class="column"
-      :class="col.blocks.length === 1 ? col.blocks[0].color : ''"
+      :class="col.singleColor"
       :style="{
         animationDelay: index * staggeredDelay + 'ms',
-        flex: col.width
+        flex: col.width,
+        background: col.background
       }"
-    >
-      <template v-if="col.blocks.length > 1">
-        <div
-          v-for="(block, bIndex) in col.blocks"
-          :key="bIndex"
-          class="row"
-          :class="block.color"
-          :style="{flex: block.size}"
-        ></div>
-      </template>
-    </div>
+    ></div>
   </section>
 </template>
 
@@ -98,14 +89,6 @@ const columnStructures = computed(() => {
     vBarY = [1, 3];
   }
 
-  const isWhite = (x, y) => {
-    const inHBar =
-      x >= hBarX[0] && x <= hBarX[1] && y >= hBarY[0] && y <= hBarY[1];
-    const inVBar =
-      x >= vBarX[0] && x <= vBarX[1] && y >= vBarY[0] && y <= vBarY[1];
-    return inHBar || inVBar;
-  };
-
   const getWeight = i => {
     if (size === 32) return 1;
     if (size === 5) {
@@ -116,28 +99,51 @@ const columnStructures = computed(() => {
     return 2;
   };
 
+  const sumWeights = (start, end) => {
+    let sum = 0;
+    for (let i = start; i < end; i++) sum += getWeight(i);
+    return sum;
+  };
+
+  const totalHeight = 32;
+
   for (let x = 0; x < size; x++) {
     const blocks = [];
-    let currentStart = 0;
-    let currentColor = isWhite(x, 0) ? 'white' : 'red';
 
-    for (let y = 1; y < size; y++) {
-      const color = isWhite(x, y) ? 'white' : 'red';
-      if (color !== currentColor) {
-        let blockSize = 0;
-        for (let k = currentStart; k < y; k++) blockSize += getWeight(k);
-        blocks.push({color: currentColor, size: blockSize});
-        currentColor = color;
-        currentStart = y;
-      }
+    if (x >= vBarX[0] && x <= vBarX[1]) {
+      blocks.push({color: 'red', size: sumWeights(0, vBarY[0])});
+      blocks.push({color: 'white', size: sumWeights(vBarY[0], vBarY[1] + 1)});
+      blocks.push({color: 'red', size: sumWeights(vBarY[1] + 1, size)});
+    } else if (x >= hBarX[0] && x <= hBarX[1]) {
+      blocks.push({color: 'red', size: sumWeights(0, hBarY[0])});
+      blocks.push({color: 'white', size: sumWeights(hBarY[0], hBarY[1] + 1)});
+      blocks.push({color: 'red', size: sumWeights(hBarY[1] + 1, size)});
+    } else {
+      blocks.push({color: 'red', size: sumWeights(0, size)});
     }
-    let blockSize = 0;
-    for (let k = currentStart; k < size; k++) blockSize += getWeight(k);
-    blocks.push({color: currentColor, size: blockSize});
+
+    let background = null;
+    let singleColor = null;
+
+    if (blocks.length === 1) {
+      singleColor = blocks[0].color;
+    } else {
+      const stops = [];
+      let currentPos = 0;
+      blocks.forEach(block => {
+        const start = (currentPos / totalHeight) * 100;
+        const end = ((currentPos + block.size) / totalHeight) * 100;
+        const colorHex = block.color === 'red' ? '#ff0000' : '#ffffff';
+        stops.push(`${colorHex} ${start}% ${end}%`);
+        currentPos += block.size;
+      });
+      background = `linear-gradient(to bottom, ${stops.join(', ')})`;
+    }
 
     cols.push({
       width: getWeight(x),
-      blocks
+      singleColor,
+      background
     });
   }
   return cols;
@@ -169,27 +175,11 @@ const columnStructures = computed(() => {
   }
 
   .column {
-    display: flex;
     flex: 1;
-    flex-direction: column;
     animation: oscillate 600ms infinite alternate ease-in-out backwards;
 
     &.red {
       background-color: #ff0000;
-    }
-
-    &.white {
-      background-color: #ffffff;
-    }
-  }
-
-  .row {
-    flex: 1;
-    inline-size: 100%;
-    background-color: #ff0000;
-
-    &.white {
-      background-color: #ffffff;
     }
   }
 }
