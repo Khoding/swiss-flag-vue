@@ -5,6 +5,7 @@
       'reduced-motion': isReducedMotion || reduceAnimation,
       'no-animation': removeAnimation
     }"
+    style="background-color: transparent !important"
   >
     <div
       v-for="(column, index) in columnStructures"

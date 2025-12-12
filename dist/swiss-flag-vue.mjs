@@ -1,4 +1,4 @@
-(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".flag[data-v-eac9fa29]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v55012462);--oscillate-distance: 2%;isolation:isolate;color-scheme:only light;forced-color-adjust:none;background-color:#fff!important;color:#000!important}.flag.reduced-motion[data-v-eac9fa29]{--oscillate-distance: 3%}.flag.no-animation .column[data-v-eac9fa29]{animation:none}.flag .column[data-v-eac9fa29]{flex:1;animation:oscillate-eac9fa29 .6s infinite alternate ease-in-out backwards;filter:none!important}@keyframes oscillate-eac9fa29{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".flag[data-v-60330733]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v4f881888);--oscillate-distance: 2%;isolation:isolate;color-scheme:only light;forced-color-adjust:none;background-color:#fff!important;color:#000!important}.flag.reduced-motion[data-v-60330733]{--oscillate-distance: 3%}.flag.no-animation .column[data-v-60330733]{animation:none}.flag .column[data-v-60330733]{flex:1;animation:oscillate-60330733 .6s infinite alternate ease-in-out backwards;filter:none!important}@keyframes oscillate-60330733{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}")),document.head.appendChild(a)}}catch(t){console.error("vite-plugin-css-injected-by-js",t)}})();
 import { useCssVars as H, computed as h, createElementBlock as S, openBlock as v, normalizeClass as E, Fragment as $, renderList as B, normalizeStyle as M } from "vue";
 const T = (l, c) => {
   const u = l.__vccOpts || l;
@@ -23,7 +23,7 @@ const T = (l, c) => {
   },
   setup(l) {
     H((e) => ({
-      v55012462: g.value
+      v4f881888: g.value
     }));
     const c = l, u = h(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches), f = h(() => c.removeAnimation ? 5 : !c.reduceAnimation && !u.value ? 32 : 15), g = h(() => {
       const e = c.inlineSize;
@@ -43,9 +43,9 @@ const T = (l, c) => {
       if (n === null) return e;
       const o = f.value;
       return `${Math.round(n / o) * o}px`;
-    }), F = h(
+    }), k = h(
       () => !c.reduceAnimation && !u.value ? 50 : 35
-    ), k = h(() => {
+    ), F = h(() => {
       const e = f.value, n = [], o = 32;
       let r, s, m, p;
       e === 32 ? (r = [6, 25], s = [13, 18], m = [13, 18], p = [6, 25]) : e === 15 ? (r = [3, 11], s = [6, 8], m = [6, 8], p = [3, 11]) : (r = [1, 3], s = [2, 2], m = [2, 2], p = [1, 3]);
@@ -90,13 +90,14 @@ const T = (l, c) => {
       class: E(["flag", {
         "reduced-motion": u.value || l.reduceAnimation,
         "no-animation": l.removeAnimation
-      }])
+      }]),
+      style: { "background-color": "transparent !important" }
     }, [
-      (v(!0), S($, null, B(k.value, (o, r) => (v(), S("div", {
+      (v(!0), S($, null, B(F.value, (o, r) => (v(), S("div", {
         key: r,
         class: "column",
         style: M({
-          animationDelay: (r - f.value) * F.value + "ms",
+          animationDelay: (r - f.value) * k.value + "ms",
           flex: o.width,
           background: o.background,
           backgroundColor: o.singleColor
@@ -104,7 +105,7 @@ const T = (l, c) => {
       }, null, 4))), 128))
     ], 2));
   }
-}, N = /* @__PURE__ */ T(I, [["__scopeId", "data-v-eac9fa29"]]), D = {
+}, N = /* @__PURE__ */ T(I, [["__scopeId", "data-v-60330733"]]), D = {
   install: (l) => {
     l.component("SwissFlag", N);
   }
