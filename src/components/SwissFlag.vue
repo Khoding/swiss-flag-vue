@@ -215,6 +215,7 @@ const columnStructures = computed(() => {
   .column {
     flex: 1;
     animation: oscillate 600ms infinite alternate ease-in-out backwards;
+    filter: none !important;
 
     &.red {
       background-color: #ff0000 !important;
