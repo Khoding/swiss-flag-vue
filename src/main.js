@@ -5,12 +5,62 @@ createApp({
   setup() {
     const reduceAnimation = ref(false);
     const removeAnimation = ref(false);
-    const flagSize = ref(12);
+    const flagSize = ref(27);
+    const showSlot = ref(true);
 
     const useManualSettings = ref(false);
     const animationSpeed = ref(600);
     const oscillateDistance = ref(2);
     const staggeredDelay = ref(50);
+
+    // Inject demo styles for the slot content
+    const style = document.createElement('style');
+    style.textContent = `
+      .credits {
+        position: absolute;
+        margin: 0;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid #eee;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        font-size: 0.9rem;
+        text-align: center;
+        white-space: nowrap;
+        
+        /* Fallback for no anchor support */
+        bottom: -3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+
+        /* Hover state handling */
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out;
+
+        &:has(a) {
+          pointer-events: auto;
+        }
+      }
+
+      .flag:hover .credits,
+      .credits:hover {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      @supports (anchor-name: --flag-grid) {
+        :slotted(.credits) {
+          position: absolute;
+          top: anchor(--flag-grid bottom);
+          left: anchor(--flag-grid center);
+          margin-top: 0.5rem;
+          bottom: auto;
+        }
+      }
+    `;
+    document.head.appendChild(style);
 
     return () => [
       h(
@@ -79,6 +129,21 @@ createApp({
                           (removeAnimation.value = e.target.checked)
                       }),
                       'No Animation'
+                    ]
+                  ),
+                  h(
+                    'label',
+                    {
+                      style:
+                        'display: flex; align-items: center; gap: 0.5rem; cursor: pointer; user-select: none;'
+                    },
+                    [
+                      h('input', {
+                        type: 'checkbox',
+                        checked: showSlot.value,
+                        onChange: e => (showSlot.value = e.target.checked)
+                      }),
+                      'Show Slot Content'
                     ]
                   )
                 ]
@@ -241,21 +306,32 @@ createApp({
             ]
           ),
 
-          h(SwissFlag, {
-            style: 'margin-inline: auto;',
-            animationSpeed: useManualSettings.value
-              ? animationSpeed.value
-              : undefined,
-            oscillateDistance: useManualSettings.value
-              ? `${oscillateDistance.value}%`
-              : undefined,
-            staggeredDelay: useManualSettings.value
-              ? staggeredDelay.value
-              : undefined,
-            inlineSize: `${flagSize.value}rem`,
-            reduceAnimation: reduceAnimation.value,
-            removeAnimation: removeAnimation.value
-          }),
+          h(
+            SwissFlag,
+            {
+              style: `margin-inline: auto; inline-size: ${flagSize.value}rem;`,
+              animationSpeed: useManualSettings.value
+                ? animationSpeed.value
+                : undefined,
+              oscillateDistance: useManualSettings.value
+                ? `${oscillateDistance.value}%`
+                : undefined,
+              staggeredDelay: useManualSettings.value
+                ? staggeredDelay.value
+                : undefined,
+              inlineSize: `${flagSize.value}rem`,
+              reduceAnimation: reduceAnimation.value,
+              removeAnimation: removeAnimation.value
+            },
+            () =>
+              showSlot.value
+                ? h('div', {
+                    class: 'credits',
+                    innerHTML:
+                      '🇨🇭 Swiss <a href="https://www.swissengineering.ch" target="_blank" rel="noopener noreferrer">Engineering</a>'
+                  })
+                : null
+          ),
 
           h(
             'div',

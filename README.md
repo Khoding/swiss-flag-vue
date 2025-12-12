@@ -21,12 +21,8 @@ Import the SwissFlag component into your Vue application and use it in your temp
 ```vue
 <template>
   <div class="container">
-    <!-- Recommended 2rem minimum, less than that makes it so tiny it looks broken -->
     <!-- Normal flag -->
     <SwissFlag />
-
-    <!-- Custom sizes -->
-    <SwissFlag inline-size="20rem" />
 
     <!-- Reduce animation variant -->
     <SwissFlag :reduce-animation="true" />
@@ -52,9 +48,22 @@ import {SwissFlag} from 'swiss-flag-vue';
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `inline-size` | String | `'12rem'` | Sets the size of the flag. The flag is a perfect square. Accepts CSS units (rem, px, vw, etc). |
 | `reduce-animation` | Boolean | `false` | When true, forces the simplified variant of the flag (fewer columns, slower animation). Automatically enabled if user prefers reduced motion. |
 | `remove-animation` | Boolean | `false` | When true, disables the waving animation completely and renders a static 5-column flag for performance. |
 | `animation-speed` | Number | `600` / `900` | (Optional) Duration of the oscillation cycle in milliseconds. Defaults to 600ms (Standard) or 900ms (Reduced Motion). |
 | `oscillate-distance` | String | `'2%'` / `'3%'` | (Optional) CSS value for the vertical displacement distance. Defaults to '2%' (Standard) or '3%' (Reduced Motion). |
 | `staggered-delay` | Number | `50` / `35` | (Optional) Delay in milliseconds between each column's animation start. Defaults to 50ms (Standard) or 35ms (Reduced Motion). |
+
+## Slots
+
+The component exposes a default slot. Content placed in this slot is rendered inside the main flag container. Since the container uses `display: flex` to render the flag columns, you will typically want to use `position: absolute` for any content injected via the slot to place it on top of the flag without disrupting the grid.
+
+```vue
+<SwissFlag>
+  <div style="position: absolute; inset: 0; display: grid; place-items: center; z-index: 10;">
+    <span style="font-size: 2rem; font-weight: bold; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+      CH
+    </span>
+  </div>
+</SwissFlag>
+```
