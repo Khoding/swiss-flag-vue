@@ -174,7 +174,7 @@ const columnStructures = computed(() => {
       background = `linear-gradient(to bottom, 
         #ff0000 0% ${whiteStartPercent}%, 
         #ffffff ${whiteStartPercent}% ${whiteEndPercent}%, 
-        #ff0000 ${whiteEndPercent}% 100%)`;
+        #ff0000 ${whiteEndPercent}% 100%) !important`;
     }
 
     columns.push({
@@ -197,8 +197,12 @@ const columnStructures = computed(() => {
 
   /* Prevent colors from being inverted by auto dark mode or high contrast mode */
   isolation: isolate;
-  color-scheme: light;
+  color-scheme: only light;
   forced-color-adjust: none;
+
+  /* Ensure the flag container itself is white if transparent parts exist */
+  background-color: white !important;
+  color: black !important;
 
   &.reduced-motion {
     --oscillate-distance: 3%;
@@ -213,7 +217,7 @@ const columnStructures = computed(() => {
     animation: oscillate 600ms infinite alternate ease-in-out backwards;
 
     &.red {
-      background-color: #ff0000;
+      background-color: #ff0000 !important;
     }
   }
 }

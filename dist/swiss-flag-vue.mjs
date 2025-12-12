@@ -1,5 +1,5 @@
-(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".flag[data-v-3dfdaa6c]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v2bd64157);--oscillate-distance: 2%;isolation:isolate;color-scheme:light;forced-color-adjust:none}.flag.reduced-motion[data-v-3dfdaa6c]{--oscillate-distance: 3%}.flag.no-animation .column[data-v-3dfdaa6c]{animation:none}.flag .column[data-v-3dfdaa6c]{flex:1;animation:oscillate-3dfdaa6c .6s infinite alternate ease-in-out backwards}.flag .column.red[data-v-3dfdaa6c]{background-color:red}@keyframes oscillate-3dfdaa6c{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
-import { useCssVars as E, computed as p, createElementBlock as S, openBlock as v, normalizeClass as F, Fragment as $, renderList as B, normalizeStyle as M } from "vue";
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".flag[data-v-2c7512f4]{display:flex;aspect-ratio:1 / 1;inline-size:var(--v355f1b8e);--oscillate-distance: 2%;isolation:isolate;color-scheme:only light;forced-color-adjust:none;background-color:#fff!important;color:#000!important}.flag.reduced-motion[data-v-2c7512f4]{--oscillate-distance: 3%}.flag.no-animation .column[data-v-2c7512f4]{animation:none}.flag .column[data-v-2c7512f4]{flex:1;animation:oscillate-2c7512f4 .6s infinite alternate ease-in-out backwards}.flag .column.red[data-v-2c7512f4]{background-color:red!important}@keyframes oscillate-2c7512f4{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
+import { useCssVars as E, computed as h, createElementBlock as S, openBlock as v, normalizeClass as F, Fragment as $, renderList as B, normalizeStyle as M } from "vue";
 const T = (l, c) => {
   const u = l.__vccOpts || l;
   for (const [f, g] of c)
@@ -23,9 +23,9 @@ const T = (l, c) => {
   },
   setup(l) {
     E((e) => ({
-      v2bd64157: g.value
+      v355f1b8e: g.value
     }));
-    const c = l, u = p(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches), f = p(() => c.removeAnimation ? 5 : !c.reduceAnimation && !u.value ? 32 : 15), g = p(() => {
+    const c = l, u = h(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches), f = h(() => c.removeAnimation ? 5 : !c.reduceAnimation && !u.value ? 32 : 15), g = h(() => {
       const e = c.inlineSize;
       if (typeof window > "u") return e;
       let n = null;
@@ -43,12 +43,12 @@ const T = (l, c) => {
       if (n === null) return e;
       const o = f.value;
       return `${Math.round(n / o) * o}px`;
-    }), x = p(
+    }), x = h(
       () => !c.reduceAnimation && !u.value ? 50 : 35
-    ), k = p(() => {
+    ), k = h(() => {
       const e = f.value, n = [], o = 32;
-      let r, s, m, h;
-      e === 32 ? (r = [6, 25], s = [13, 18], m = [13, 18], h = [6, 25]) : e === 15 ? (r = [3, 11], s = [6, 8], m = [6, 8], h = [3, 11]) : (r = [1, 3], s = [2, 2], m = [2, 2], h = [1, 3]);
+      let r, s, m, p;
+      e === 32 ? (r = [6, 25], s = [13, 18], m = [13, 18], p = [6, 25]) : e === 15 ? (r = [3, 11], s = [6, 8], m = [6, 8], p = [3, 11]) : (r = [1, 3], s = [2, 2], m = [2, 2], p = [1, 3]);
       const w = (t) => {
         if (e === 32) return 1;
         if (e === 5)
@@ -64,7 +64,7 @@ const T = (l, c) => {
       for (let t = 0; t < e; t++) {
         let i = -1, a = -1;
         const d = t >= m[0] && t <= m[1], b = t >= r[0] && t <= r[1];
-        d ? (i = h[0], a = h[1]) : b && (i = s[0], a = s[1]);
+        d ? (i = p[0], a = p[1]) : b && (i = s[0], a = s[1]);
         let A = null, W = null;
         if (i === -1)
           W = "red";
@@ -76,7 +76,7 @@ const T = (l, c) => {
           A = `linear-gradient(to bottom, 
         #ff0000 0% ${_}%, 
         #ffffff ${_}% ${C}%, 
-        #ff0000 ${C}% 100%)`;
+        #ff0000 ${C}% 100%) !important`;
         }
         n.push({
           width: w(t),
@@ -103,7 +103,7 @@ const T = (l, c) => {
       }, null, 6))), 128))
     ], 2));
   }
-}, N = /* @__PURE__ */ T(I, [["__scopeId", "data-v-3dfdaa6c"]]), D = {
+}, N = /* @__PURE__ */ T(I, [["__scopeId", "data-v-2c7512f4"]]), D = {
   install: (l) => {
     l.component("SwissFlag", N);
   }
