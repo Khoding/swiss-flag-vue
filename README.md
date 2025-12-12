@@ -14,22 +14,33 @@ npm install github:Khoding/swiss-flag-vue
 
 ## Usage
 
+### Local Registration
+
 Import the SwissFlag component into your Vue application and use it in your templates:
 
 ```vue
 <template>
-  <!-- Recommended 2rem minimum, less than that makes it so tiny it looks broken -->
-  <!-- Normal flag -->
-  <SwissFlag />
+  <div class="container">
+    <!-- Recommended 2rem minimum, less than that makes it so tiny it looks broken -->
+    <!-- Normal flag -->
+    <SwissFlag />
 
-  <!-- Custom sizes -->
-  <SwissFlag inline-size="20rem" />
+    <!-- Custom sizes -->
+    <SwissFlag inline-size="20rem" />
 
-  <!-- Reduce animation variant -->
-  <SwissFlag :reduce-animation="true" />
+    <!-- Reduce animation variant -->
+    <SwissFlag :reduce-animation="true" />
 
-  <!-- Disable animation -->
-  <SwissFlag :remove-animation="true" />
+    <!-- Disable animation -->
+    <SwissFlag :remove-animation="true" />
+
+    <!-- Advanced Animation Controls -->
+    <SwissFlag
+      :animation-speed="1000"
+      oscillate-distance="5%"
+      :staggered-delay="100"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -41,6 +52,9 @@ import {SwissFlag} from 'swiss-flag-vue';
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `inline-size` | String | `12rem` | Sets the size of the flag. The flag is a perfect square. |
-| `reduce-animation` | Boolean | `false` | When true, forces the simplified variant of the flag, this variant is automatically used when the user has enabled the "reduce motion" setting in their operating system. |
-| `remove-animation` | Boolean | `false` | When true, disables the waving animation of the flag and makes it a 5 columns flag for performances (not because the animated flags are massive, but because since we can reduce the amount of nodes, why not do it?). |
+| `inline-size` | String | `'12rem'` | Sets the size of the flag. The flag is a perfect square. Accepts CSS units (rem, px, vw, etc). |
+| `reduce-animation` | Boolean | `false` | When true, forces the simplified variant of the flag (fewer columns, slower animation). Automatically enabled if user prefers reduced motion. |
+| `remove-animation` | Boolean | `false` | When true, disables the waving animation completely and renders a static 5-column flag for performance. |
+| `animation-speed` | Number | `600` / `900` | (Optional) Duration of the oscillation cycle in milliseconds. Defaults to 600ms (Standard) or 900ms (Reduced Motion). |
+| `oscillate-distance` | String | `'2%'` / `'3%'` | (Optional) CSS value for the vertical displacement distance. Defaults to '2%' (Standard) or '3%' (Reduced Motion). |
+| `staggered-delay` | Number | `50` / `35` | (Optional) Delay in milliseconds between each column's animation start. Defaults to 50ms (Standard) or 35ms (Reduced Motion). |
