@@ -10,11 +10,11 @@
       v-for="(column, index) in columnStructures"
       :key="index"
       class="column"
-      :class="column.singleColor"
       :style="{
         animationDelay: (index - gridSize) * staggeredDelay + 'ms',
         flex: column.width,
-        background: column.background
+        background: column.background,
+        backgroundColor: column.singleColor
       }"
     ></div>
   </section>
@@ -157,7 +157,7 @@ const columnStructures = computed(() => {
 
     // If no white stripe, it's a solid red column
     if (whiteStripeStart === -1) {
-      singleColor = 'red';
+      singleColor = 'red !important';
     } else {
       // Calculate the height of each segment (Red -> White -> Red)
       const topRedHeight = calculateHeightWeight(0, whiteStripeStart);
@@ -216,10 +216,6 @@ const columnStructures = computed(() => {
     flex: 1;
     animation: oscillate 600ms infinite alternate ease-in-out backwards;
     filter: none !important;
-
-    &.red {
-      background-color: #ff0000 !important;
-    }
   }
 }
 
