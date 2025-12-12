@@ -2,7 +2,7 @@
   <section
     class="flag"
     :class="{
-      'reduced-motion': isReducedMotion || reduceAnimation,
+      'reduced-motion': effectiveReduceAnimation,
       'no-animation': removeAnimation
     }"
     style="background-color: transparent !important"
@@ -12,7 +12,7 @@
       :key="index"
       class="column"
       :style="{
-        animationDelay: (index - gridSize) * staggeredDelay + 'ms',
+        animationDelay: (index - gridSize) * activeStaggeredDelay + 'ms',
         flex: column.width,
         background: column.background,
         backgroundColor: column.singleColor
@@ -33,6 +33,18 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  animationSpeed: {
+    type: Number,
+    default: undefined
+  },
+  oscillateDistance: {
+    type: String,
+    default: undefined
+  },
+  staggeredDelay: {
+    type: Number,
+    default: undefined
+  },
   removeAnimation: {
     type: Boolean,
     default: false
@@ -43,51 +55,21 @@ const isReducedMotion = computed(() => {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 });
 
+const effectiveReduceAnimation = computed(() => {
+  return props.reduceAnimation || isReducedMotion.value;
+});
+
 const gridSize = computed(() => {
   if (props.removeAnimation) {
     return 5;
   }
 
-  if (!props.reduceAnimation && !isReducedMotion.value) {
+  if (!effectiveReduceAnimation.value) {
     return 32;
   }
 
   return 15;
 });
-
-const friendlyInlineSize = computed(() => {
-  const raw = props.inlineSize;
-
-  if (typeof window === 'undefined') return raw;
-
-  let pixelWidth = null;
-
-  if (typeof raw === 'number') {
-    pixelWidth = raw;
-  } else if (typeof raw === 'string') {
-    if (raw.endsWith('px') || !isNaN(raw)) {
-      pixelWidth = parseFloat(raw);
-    } else if (raw.endsWith('rem')) {
-      const rootFontSize = parseFloat(
-        getComputedStyle(document.documentElement).fontSize
-      );
-      pixelWidth = parseFloat(raw) * rootFontSize;
-    } else if (raw.endsWith('vw')) {
-      pixelWidth = (parseFloat(raw) * window.innerWidth) / 100;
-    }
-  }
-
-  if (pixelWidth === null) return raw;
-
-  const numOfColumns = gridSize.value;
-  const friendlyWidth = Math.round(pixelWidth / numOfColumns) * numOfColumns;
-
-  return `${friendlyWidth}px`;
-});
-
-const staggeredDelay = computed(() =>
-  !props.reduceAnimation && !isReducedMotion.value ? 50 : 35
-);
 
 const columnStructures = computed(() => {
   const size = gridSize.value;
@@ -187,14 +169,39 @@ const columnStructures = computed(() => {
 
   return columns;
 });
+
+const activeStaggeredDelay = computed(() => {
+  if (props.staggeredDelay !== undefined) {
+    return props.staggeredDelay;
+  }
+  return !effectiveReduceAnimation.value ? 50 : 35;
+});
+
+const activeAnimationSpeed = computed(() => {
+  if (props.animationSpeed !== undefined) {
+    return props.animationSpeed;
+  }
+  return !effectiveReduceAnimation.value ? 600 : 900;
+});
+
+const activeOscillateDistance = computed(() => {
+  if (props.oscillateDistance !== undefined) {
+    return props.oscillateDistance;
+  }
+  return !effectiveReduceAnimation.value ? '2%' : '3%';
+});
+
+let animationSpeedValue = computed(() => {
+  return `${activeAnimationSpeed.value}ms`;
+});
 </script>
 
 <style scoped>
 .flag {
   display: flex;
   aspect-ratio: 1 / 1;
-  inline-size: v-bind(friendlyInlineSize);
-  --oscillate-distance: 2%;
+  inline-size: v-bind(inlineSize);
+  --oscillate-distance: v-bind(activeOscillateDistance);
 
   /* Prevent colors from being inverted by auto dark mode or high contrast mode */
   isolation: isolate;
@@ -205,17 +212,14 @@ const columnStructures = computed(() => {
   background-color: white !important;
   color: black !important;
 
-  &.reduced-motion {
-    --oscillate-distance: 3%;
-  }
-
   &.no-animation .column {
     animation: none;
   }
 
   .column {
     flex: 1;
-    animation: oscillate 600ms infinite alternate ease-in-out backwards;
+    animation: oscillate v-bind(animationSpeedValue) infinite alternate
+      ease-in-out backwards;
     filter: none !important;
   }
 }
