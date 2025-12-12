@@ -25,10 +25,6 @@
 import {computed} from 'vue';
 
 const props = defineProps({
-  inlineSize: {
-    type: String,
-    default: '12rem'
-  },
   reduceAnimation: {
     type: Boolean,
     default: false
@@ -200,7 +196,6 @@ let animationSpeedValue = computed(() => {
 .flag {
   display: flex;
   aspect-ratio: 1 / 1;
-  inline-size: v-bind(inlineSize);
   --oscillate-distance: v-bind(activeOscillateDistance);
 
   /* Prevent colors from being inverted by auto dark mode or high contrast mode */
