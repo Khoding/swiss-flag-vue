@@ -5,7 +5,6 @@
       'reduced-motion': effectiveReduceAnimation,
       'no-animation': removeAnimation
     }"
-    style="background-color: transparent !important"
   >
     <div
       v-for="(column, index) in columnStructures"
@@ -206,10 +205,6 @@ let animationSpeedValue = computed(() => {
   isolation: isolate;
   color-scheme: only light;
   forced-color-adjust: none;
-
-  /* Ensure the flag container itself is white if transparent parts exist */
-  background-color: white !important;
-  color: black !important;
 
   &.no-animation .column {
     animation: none;

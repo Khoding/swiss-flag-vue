@@ -1,4 +1,4 @@
-(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".flag[data-v-221188e4]{display:flex;aspect-ratio:1 / 1;position:relative;anchor-name:--flag-grid;--oscillate-distance: var(--v3f095c52);isolation:isolate;color-scheme:only light;forced-color-adjust:none;background-color:#fff!important;color:#000!important}.flag.no-animation .column[data-v-221188e4]{animation:none}.flag .column[data-v-221188e4]{flex:1;animation:oscillate-221188e4 var(--f96dcbae) infinite alternate ease-in-out backwards;filter:none!important}@keyframes oscillate-221188e4{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
+(function(){"use strict";try{if(typeof document<"u"){var e=document.createElement("style");e.appendChild(document.createTextNode(".flag[data-v-6de4740c]{display:flex;aspect-ratio:1 / 1;position:relative;anchor-name:--flag-grid;--oscillate-distance: var(--deb32198);isolation:isolate;color-scheme:only light;forced-color-adjust:none}.flag.no-animation .column[data-v-6de4740c]{animation:none}.flag .column[data-v-6de4740c]{flex:1;animation:oscillate-6de4740c var(--v1996ee0b) infinite alternate ease-in-out backwards;filter:none!important}@keyframes oscillate-6de4740c{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}")),document.head.appendChild(e)}}catch(a){console.error("vite-plugin-css-injected-by-js",a)}})();
 import { useCssVars as E, unref as F, computed as o, createElementBlock as S, openBlock as h, normalizeClass as T, renderSlot as M, Fragment as N, renderList as O, normalizeStyle as R } from "vue";
 const V = (a, t) => {
   const g = a.__vccOpts || a;
@@ -31,8 +31,8 @@ const V = (a, t) => {
   },
   setup(a) {
     E((i) => ({
-      v3f095c52: W.value,
-      f96dcbae: F($)
+      deb32198: W.value,
+      v1996ee0b: F($)
     }));
     const t = a, g = o(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches), l = o(() => t.reduceAnimation || g.value), p = o(() => t.removeAnimation ? 5 : l.value ? 15 : 32), C = o(() => {
       const i = p.value, v = [], c = 32;
@@ -61,11 +61,11 @@ const V = (a, t) => {
           const b = A(0, n), B = A(
             n,
             s + 1
-          ), k = b / c * 100, D = (b + B) / c * 100;
+          ), D = b / c * 100, k = (b + B) / c * 100;
           w = `linear-gradient(to bottom, 
-        #ff0000 0% ${k}%, 
-        #ffffff ${k}% ${D}%, 
-        #ff0000 ${D}% 100%) !important`;
+        #ff0000 0% ${D}%, 
+        #ffffff ${D}% ${k}%, 
+        #ff0000 ${k}% 100%) !important`;
         }
         v.push({
           width: y(e),
@@ -80,8 +80,7 @@ const V = (a, t) => {
       class: T(["flag", {
         "reduced-motion": l.value,
         "no-animation": a.removeAnimation
-      }]),
-      style: { "background-color": "transparent !important" }
+      }])
     }, [
       (h(!0), S(N, null, O(C.value, (c, r) => (h(), S("div", {
         key: r,
@@ -96,7 +95,7 @@ const V = (a, t) => {
       M(i.$slots, "default", {}, void 0, !0)
     ], 2));
   }
-}, L = /* @__PURE__ */ V(I, [["__scopeId", "data-v-221188e4"]]), X = {
+}, L = /* @__PURE__ */ V(I, [["__scopeId", "data-v-6de4740c"]]), X = {
   install: (a) => {
     a.component("SwissFlag", L);
   }
