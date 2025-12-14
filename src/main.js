@@ -50,11 +50,11 @@ createApp({
         pointer-events: auto;
       }
 
-      @supports (anchor-name: --flag-grid) {
+      @supports (anchor-name: --flag) {
         :slotted(.credits) {
           position: absolute;
-          top: anchor(--flag-grid bottom);
-          left: anchor(--flag-grid center);
+          top: anchor(--flag bottom);
+          left: anchor(--flag center);
           margin-top: 0.5rem;
           bottom: auto;
         }
@@ -309,7 +309,7 @@ createApp({
           h(
             SwissFlag,
             {
-              style: `margin-inline: auto; inline-size: ${flagSize.value}rem;`,
+              style: `margin-inline: auto; inline-size: ${flagSize.value}rem;anchor-name: --flag; position: relative;`,
               animationSpeed: useManualSettings.value
                 ? animationSpeed.value
                 : undefined,
@@ -348,7 +348,7 @@ createApp({
                   style:
                     'color: inherit; text-decoration: none; border-bottom: 1px solid #ccc;'
                 },
-                'View on GitHub'
+                'View on GitHub and use the Swiss Flag Vue component in your projects!'
               )
             ]
           )
