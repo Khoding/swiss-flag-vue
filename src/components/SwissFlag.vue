@@ -197,8 +197,6 @@ let animationSpeedValue = computed(() => {
 .flag {
   display: flex;
   aspect-ratio: 1 / 1;
-  position: relative;
-  anchor-name: --flag-grid;
   --oscillate-distance: v-bind(activeOscillateDistance);
 
   /* Prevent colors from being inverted by auto dark mode or high contrast mode */

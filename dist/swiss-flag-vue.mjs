@@ -1,4 +1,4 @@
-(function(){"use strict";try{if(typeof document<"u"){var e=document.createElement("style");e.appendChild(document.createTextNode(".flag[data-v-6de4740c]{display:flex;aspect-ratio:1 / 1;position:relative;anchor-name:--flag-grid;--oscillate-distance: var(--deb32198);isolation:isolate;color-scheme:only light;forced-color-adjust:none}.flag.no-animation .column[data-v-6de4740c]{animation:none}.flag .column[data-v-6de4740c]{flex:1;animation:oscillate-6de4740c var(--v1996ee0b) infinite alternate ease-in-out backwards;filter:none!important}@keyframes oscillate-6de4740c{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}")),document.head.appendChild(e)}}catch(a){console.error("vite-plugin-css-injected-by-js",a)}})();
+(function(){"use strict";try{if(typeof document<"u"){var a=document.createElement("style");a.appendChild(document.createTextNode(".flag[data-v-52a75600]{display:flex;aspect-ratio:1 / 1;--oscillate-distance: var(--v380e9766);isolation:isolate;color-scheme:only light;forced-color-adjust:none}.flag.no-animation .column[data-v-52a75600]{animation:none}.flag .column[data-v-52a75600]{flex:1;animation:oscillate-52a75600 var(--v8afcb0b8) infinite alternate ease-in-out backwards;filter:none!important}@keyframes oscillate-52a75600{0%{transform:translateY(var(--oscillate-distance, 2%))}to{transform:translateY(calc(-1 * var(--oscillate-distance, 2%)))}}")),document.head.appendChild(a)}}catch(e){console.error("vite-plugin-css-injected-by-js",e)}})();
 import { useCssVars as E, unref as F, computed as o, createElementBlock as S, openBlock as h, normalizeClass as T, renderSlot as M, Fragment as N, renderList as O, normalizeStyle as R } from "vue";
 const V = (a, t) => {
   const g = a.__vccOpts || a;
@@ -31,8 +31,8 @@ const V = (a, t) => {
   },
   setup(a) {
     E((i) => ({
-      deb32198: W.value,
-      v1996ee0b: F($)
+      v380e9766: W.value,
+      v8afcb0b8: F($)
     }));
     const t = a, g = o(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches), l = o(() => t.reduceAnimation || g.value), p = o(() => t.removeAnimation ? 5 : l.value ? 15 : 32), C = o(() => {
       const i = p.value, v = [], c = 32;
@@ -95,7 +95,7 @@ const V = (a, t) => {
       M(i.$slots, "default", {}, void 0, !0)
     ], 2));
   }
-}, L = /* @__PURE__ */ V(I, [["__scopeId", "data-v-6de4740c"]]), X = {
+}, L = /* @__PURE__ */ V(I, [["__scopeId", "data-v-52a75600"]]), X = {
   install: (a) => {
     a.component("SwissFlag", L);
   }
