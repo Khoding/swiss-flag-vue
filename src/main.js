@@ -5,7 +5,7 @@ createApp({
   setup() {
     const reduceAnimation = ref(false);
     const removeAnimation = ref(false);
-    const flagSize = ref(27);
+    const flagSize = ref(12);
     const showSlot = ref(true);
 
     const useManualSettings = ref(false);
