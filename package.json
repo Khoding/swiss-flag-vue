@@ -14,6 +14,8 @@
     }
   },
   "scripts": {
+    "prepublishOnly": "npm run build",
+    "postversion": "git push && git push --tags",
     "deploy": "vite build -c vite.config.demo.js && gh-pages -d dist-demo",
     "build": "vite build",
     "build:demo": "vite build -c vite.config.demo.js",
