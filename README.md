@@ -2,7 +2,8 @@
 
 This Swiss Flag, whose inspiration came from Josh W. Comeau's [Pride Flag](https://www.joshwcomeau.com/animation/pride-flags/), is a simple Vue component that displays the Swiss flag with a subtle waving animation.
 
-You can see a demo of the component [here](https://swiss-flag.khodok.com).
+You can see a demo of the component [here](https://swiss-flag-vue.khodok.com).
+The new version, made using Web Components instead of Vue.js, is available [here](https://swiss-flag.khodok.com) 
 
 ## Installation
 
